@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/input"
+    android:layout_margin="4dp"
+    android:padding="4dp">
+
+    <TextView
+        android:id="@+id/view_recharge_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="5sp"/>
+
+    <TextView
+        android:id="@+id/view_recharge_number"
+        android:layout_below="@id/view_recharge_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="5sp"/>
+
+    <TextView
+        android:id="@+id/view_recharge_amount"
+        android:layout_below="@id/view_recharge_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="5sp"/>
+
+    <TextView
+        android:id="@+id/view_recharge_ref_id"
+        android:layout_below="@id/view_recharge_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="5sp"/>
+
+    <TextView
+        android:id="@+id/view_recharge_operator"
+        android:layout_below="@id/view_recharge_ref_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="5sp"/>
+
+    <TextView
+        android:id="@+id/view_recharge_added_by"
+        android:layout_below="@id/view_recharge_operator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="5sp"/>
+    <TextView
+        android:id="@+id/view_recharge_user_name"
+        android:layout_below="@id/view_recharge_added_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="5sp"/>
+    <TextView
+        android:id="@+id/view_recharge_date"
+        android:layout_below="@id/view_recharge_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="5sp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_below="@id/view_recharge_date"
+        android:padding="10dp"
+        android:text="Recharge Details"
+        android:id="@+id/view_recharge_status"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_margin="5dp"/>
+
+
+</RelativeLayout>

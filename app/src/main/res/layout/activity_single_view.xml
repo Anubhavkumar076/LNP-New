@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background">
+
+    <!--    <ImageView android:id="@+id/SingleView"-->
+    <!--        android:layout_width="fill_parent"-->
+    <!--        android:layout_height="fill_parent"/>-->
+    <!--    <include-->
+    <!--        layout="@layout/app_bar_layout"-->
+    <!--        android:id="@+id/Find_Friends_Toolbar"/>-->
+
+    <!--    <Spinner-->
+    <!--        android:id="@+id/spinner1"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:spinnerMode="dropdown"-->
+    <!--        android:background="@drawable/input"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:layout_margin="40dp"-->
+    <!--        android:paddingLeft="20dp"/>-->
+
+
+    <!--
+    slideranimation duration is to set duration for transition between two slides
+    sliderautocycledirection is to set animationbetween transition of your slides
+    sliderindicator enables is used to display the indicators for slider
+    slider indicator gravity is to set gravity for indicator gravity
+    slider indicator margin is to set margin for indicator
+    slider indicator orientation is used to add orientation for slider
+    slider indicator padding is use to add padding to indicator
+    slider indicator selected color is use to specify selected color
+    and slider indicator unselected color is use to specify the color when the slider is unselected
+    slider scroll time in sec is used to specify scrolling time in seconds
+    -->
+    <com.smarteist.autoimageslider.SliderView
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="3dp"
+        app:sliderAnimationDuration="600"
+        app:sliderAutoCycleDirection="back_and_forth"
+        app:sliderIndicatorAnimationDuration="600"
+        app:sliderIndicatorEnabled="true"
+        app:sliderIndicatorGravity="center_horizontal|bottom"
+        app:sliderIndicatorMargin="15dp"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorPadding="3dp"
+        app:sliderIndicatorRadius="1dp"
+        app:sliderIndicatorSelectedColor="#5A5A5A"
+        app:sliderIndicatorUnselectedColor="#FFF"
+        app:sliderScrollTimeInSec="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/fullname_edittext"
+        android:layout_below="@id/slider"
+        android:hint="Full Name"
+        android:background="@drawable/input"
+        android:layout_margin="5dp"
+        android:paddingLeft="20dp"
+        android:maxLines="1"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/address_edittext"
+        android:layout_below="@id/fullname_edittext"
+        android:hint="Address"
+        android:background="@drawable/input"
+        android:layout_margin="5dp"
+        android:paddingLeft="20dp"
+        android:maxLines="1"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hide_section"
+        android:layout_below="@+id/address_edittext">
+
+        <!--    To hide-->
+
+        <!--    Loan-->
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/loan_category_edittext"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/input"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:paddingLeft="20dp"/>
+
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/loan_type_edittext"
+            android:layout_below="@+id/loan_category_edittext"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/input"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:paddingLeft="20dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/loan_amount_edittext"
+            android:layout_below="@id/loan_type_edittext"
+            android:hint="Loan Amount"
+            android:phoneNumber="true"
+            android:background="@drawable/input"
+            android:layout_margin="5dp"
+            android:paddingLeft="20dp"
+            android:maxLines="1"/>
+        <!--        Loan ends-->
+        <!--       CA Service-->
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/service_edittext"
+            android:hint="CA Service Type"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/input"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:paddingLeft="20dp"/>
+        <!--       CA Service ends-->
+        <!--    Engineer Service-->
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/engineer_building_type_edittext"
+            android:hint="Engineer Building Type"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/input"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:paddingLeft="20dp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/engineer_service_type_edittext"
+            android:layout_below="@id/engineer_building_type_edittext"
+            android:hint="Engineer Service Type"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/input"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:paddingLeft="20dp"/>
+
+        <!--Super Saving Pack-->
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/tenure_edittext"
+            android:hint="Tenure"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/input"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:paddingLeft="20dp"/>
+
+        <!--    To hide Stop-->
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/mobile_number_edittext"
+        android:layout_below="@+id/hide_section"
+        android:hint="Mobile Number"
+        android:background="@drawable/input"
+        android:layout_margin="5dp"
+        android:phoneNumber="true"
+        android:maxLength="10"
+        android:paddingLeft="20dp"
+        android:maxLines="1"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/savings_amount_edittext"
+        android:layout_below="@id/mobile_number_edittext"
+        android:hint="Amount"
+        android:phoneNumber="true"
+        android:background="@drawable/input"
+        android:layout_margin="5dp"
+        android:paddingLeft="20dp"
+        android:maxLines="1"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_below="@id/savings_amount_edittext"
+        android:layout_centerHorizontal="true"
+        android:text="SUBMIT"
+        android:id="@+id/submit"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_margin="5dp"/>
+</RelativeLayout>

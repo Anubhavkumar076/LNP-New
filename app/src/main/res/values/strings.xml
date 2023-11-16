@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">LNP</string>
+    <string name="action_logout">Logout</string>
+    <string name="my_profile">My Profile</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="youtube">Youtube</string>
+    <string name="instagram">Instagram</string>
+    <string name="lnp_ekart">LNP eKart</string>
+    <string name="action_delete_account">Delete Account</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+</resources>

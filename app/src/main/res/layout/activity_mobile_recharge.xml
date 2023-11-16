@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MobileRecharge"
+    android:background="@drawable/background">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/mobile_number_edittext"
+        android:hint="Mobile Number"
+        android:textColor="@color/black"
+        android:background="@drawable/input"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="20dp"
+        android:maxLines="1"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_below="@id/mobile_number_edittext"
+        android:layout_centerHorizontal="true"
+        android:text="Get Operator"
+        android:id="@+id/get_operator"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_margin="5dp"/>
+
+    <Spinner
+        android:id="@+id/spinner_mobile_recharge"
+        android:layout_below="@id/mobile_number_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="30dp"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_below="@id/spinner_mobile_recharge"
+        android:layout_centerHorizontal="true"
+        android:text="Browse Plans"
+        android:id="@+id/browse_plans"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_margin="5dp"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/operator_list_relative"
+        android:layout_below="@id/browse_plans"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:id="@+id/mobile_recharge_all"
+            android:padding="5dp"
+            android:text="All"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="6dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:id="@+id/mobile_recharge_full_tt"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/mobile_recharge_all"
+            android:text="Full TT"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="2dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:id="@+id/mobile_recharge_full_top_up"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/mobile_recharge_full_tt"
+            android:text="TOP UP"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="2dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:id="@+id/mobile_recharge_3g"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/mobile_recharge_full_top_up"
+            android:text="3G/4G"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="2dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:id="@+id/mobile_recharge_2g"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/mobile_recharge_3g"
+            android:text="2G"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="2dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:id="@+id/mobile_recharge_SMS"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/mobile_recharge_2g"
+            android:text="SMS"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="2dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:id="@+id/mobile_recharge_roaming"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/mobile_recharge_SMS"
+            android:text="Roaming"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="2dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:id="@+id/mobile_recharge_combo"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/mobile_recharge_roaming"
+            android:text="COMBO"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="2dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+
+        <!--Recycler View widget-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mobile_recharge_recyclerview"
+            android:layout_below="@id/mobile_recharge_all"
+            android:scrollbars="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

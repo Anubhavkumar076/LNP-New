@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.BBPSActivity"
+    android:background="@drawable/background">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/bbps_number"
+        android:textColor="@color/black"
+        android:hint="Number"
+        android:background="@drawable/input"
+        android:layout_margin="5dp"
+        android:paddingLeft="20dp"
+        android:maxLines="1"
+        />
+
+    <Spinner
+        android:id="@+id/bbps_operator_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="30dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@id/bbps_number"
+        />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bbps_radio_group"
+        android:orientation="horizontal"
+        android:layout_below="@id/bbps_operator_spinner"
+        >
+
+        <RadioButton
+            android:id="@+id/bbps_radio_online"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  Online"
+            android:layout_margin="10dp"
+            android:checked="false"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/bbps_radio_offline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="   Offline"
+            android:layout_margin="10dp"
+            android:checked="false"
+            android:textSize="20dp" />
+    </RadioGroup>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_below="@id/bbps_radio_group"
+        android:layout_centerHorizontal="true"
+        android:text="Fetch Bill Details"
+        android:id="@+id/bbps_fetch_bill_button"
+        android:onClick="onclickbuttonMethod"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/bbps_fetch_bill_name"
+        android:layout_below="@id/bbps_fetch_bill_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="5sp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/bbps_fetch_bill_amount"
+        android:layout_below="@id/bbps_fetch_bill_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:padding="5sp"
+        android:visibility="gone"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_below="@id/bbps_fetch_bill_amount"
+        android:layout_centerHorizontal="true"
+        android:text="Pay Bill"
+        android:id="@+id/bbps_pay_bill"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_margin="5dp"
+        android:visibility="gone"/>
+
+</RelativeLayout>

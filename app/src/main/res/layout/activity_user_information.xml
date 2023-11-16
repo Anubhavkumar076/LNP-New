@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.UserInformationActivity"
+    android:background="@drawable/background">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/first_name"
+        android:hint="First Name"
+        android:textColor="@color/black"
+        android:background="@drawable/input"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:paddingLeft="20dp"
+        android:maxLines="1"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/last_name"
+        android:textColor="@color/black"
+        android:hint="Last Name"
+        android:layout_below="@id/first_name"
+        android:background="@drawable/input"
+        android:layout_margin="5dp"
+        android:paddingLeft="20dp"
+        android:maxLines="1"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/city_name"
+        android:hint="City/Town"
+        android:layout_below="@id/last_name"
+        android:textColor="@color/black"
+        android:background="@drawable/input"
+        android:layout_margin="5dp"
+        android:paddingLeft="20dp"
+        android:maxLines="1"
+        />
+
+
+    <Spinner
+        android:id="@+id/state_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input"
+        android:layout_below="@id/city_name"
+        android:spinnerMode="dropdown"
+        android:paddingLeft="10dp"
+        android:layout_margin="5dp"
+        />
+
+    <Spinner
+        android:id="@+id/district_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input"
+        android:spinnerMode="dropdown"
+        android:paddingLeft="10dp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/state_name"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/email_id"
+        android:textColor="@color/black"
+        android:hint="Phone Number"
+        android:layout_below="@id/district_name"
+        android:background="@drawable/input"
+        android:layout_margin="5dp"
+        android:paddingLeft="20dp"
+        android:maxLines="1"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button"
+        android:layout_below="@id/email_id"
+        android:layout_centerHorizontal="true"
+        android:text="Submit"
+        android:id="@+id/submit_button"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_margin="5dp"/>
+
+</RelativeLayout>

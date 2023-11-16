@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.BannerUpdateActivity"
+    android:background="@drawable/background">
+
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="30dp"
+        android:layout_margin="10dp"
+        />
+
+    <ImageView
+        android:id="@+id/img_view"
+        android:background="@drawable/select_image_foreground"
+        android:layout_below="@id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:padding="5dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_view"
+        android:id="@+id/select_image_txt"
+        android:text="SELECT IMAGE"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        />
+
+
+    <Button
+        android:id="@+id/upload"
+        android:text="UPLOAD"
+        android:textColor="@color/black"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/teal_700"
+        android:layout_below="@id/select_image_txt"/>
+
+</RelativeLayout>

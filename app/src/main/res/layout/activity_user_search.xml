@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.UserSearchActivity"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="5"
+        android:orientation="horizontal"
+        android:id="@+id/user_search_linear">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:id="@+id/user_search_search"
+            android:hint="Search by Name"
+            android:textColor="@color/black"
+            android:background="@drawable/input"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="20dp"
+            android:maxLines="1"
+            android:layout_weight="4"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/input"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="2dp"
+            android:id="@+id/user_search_button"
+            android:text="Search"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            />
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/user_search_recycler"
+        android:layout_margin="5dp"
+        android:scrollbars="vertical"
+        android:layout_below="@id/user_search_linear">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

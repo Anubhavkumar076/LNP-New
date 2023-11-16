@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ContactUsActivity"
+    android:background="@drawable/background">
+
+    <Spinner
+        android:id="@+id/contact_us_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        />
+
+    <EditText
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:id="@+id/contact_us_query"
+        android:layout_below="@id/contact_us_spinner"
+        android:gravity="top|start"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:scrollbars="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:padding="15dp"
+        android:background="@drawable/input"
+    />
+
+    <Button
+        android:id="@+id/send_query"
+        android:text="Send Query"
+        android:textColor="@color/black"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/teal_700"
+        android:layout_below="@id/contact_us_query"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TextView
+            android:id="@+id/contact_us_mobile"
+            android:layout_above="@id/contact_us_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:padding="2sp"
+            android:text="Email: Customercare@lnpminibank.com"
+            android:textStyle="bold"
+            android:gravity="bottom"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/contact_us_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="Mobile and WhatsApp: +91-8501956511"
+            android:padding="2sp"
+            android:gravity="bottom"
+            android:layout_centerHorizontal="true"
+
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

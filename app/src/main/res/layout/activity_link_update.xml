@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LinkUpdateActivity"
+    android:background="@drawable/background">
+
+    <Spinner
+        android:id="@+id/link_update_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="30dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/link_edittext"
+        android:textColor="@color/black"
+        android:hint="Enter Link"
+        android:layout_below="@id/link_update_spinner"
+        android:background="@drawable/input"
+        android:layout_margin="5dp"
+        android:paddingLeft="20dp"
+        android:maxLines="1"
+        />
+
+
+    <Button
+        android:id="@+id/update_link"
+        android:text="Update Link"
+        android:textColor="@color/black"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/teal_700"
+        android:layout_below="@id/link_edittext"/>
+
+</RelativeLayout>

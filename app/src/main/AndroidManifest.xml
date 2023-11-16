@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/logo_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/logo_icon"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.LNP"
+        tools:targetApi="31">
+        <activity
+            android:name=".activity.PanStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UserDetails"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UserSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AdminUserRetailerVerificationDetails"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AdminRetailerVerification"
+            android:exported="false" />
+        <activity
+            android:name=".ViewBBPSActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.FundRequestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.RetailerVerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ViewBBPSActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BBPSActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BBPSUtilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ViewRechargeDetailsInfo"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MobileRechargeUtilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ViewPanCardInfo"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PanCardUtilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PanCardWebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PanCardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MobileRecharge"
+            android:exported="false" />
+        <activity
+            android:name=".activity.QueryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AdminDistrictActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UserProfile"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ContactUsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.LinkUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BannerUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UserInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SplashScreenActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ViewContactFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SingleViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AdminPanelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:label="@string/app_name" />
+    </application>
+
+</manifest>
