@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     String utilityName[]= {"Recharge", "PAN Card", "BBPS", "Fund Request"};
 
     int utilityImage[]={
-            R.drawable.loans, R.drawable.caservice, R.drawable.engineerservice, R.drawable.engineerservice
+            R.mipmap.recharge, R.mipmap.pan, R.mipmap.bill, R.mipmap.fund
 
     };
     String iconNameAdmin[]= {"Loans", "CA", "Engineer", "Cibil", "Savings", "View Forms", "Admin"};
@@ -425,7 +425,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(i);
                 } else if (position == 0) {
                     Intent i = new Intent(getApplicationContext(), SingleViewActivity.class);
-                    i.putExtra("service","Loan Services");
+                    i.putExtra("service","Other Services");
                     startActivity(i);
                 } else if (position == 1) {
                     Intent i = new Intent(getApplicationContext(), SingleViewActivity.class);

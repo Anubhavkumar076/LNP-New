@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MobileRechargeUtilActivity">
+    tools:context=".activity.MobileRechargeUtilActivity"
+    android:background="@mipmap/background_trial">
 
     <GridView
         android:id="@+id/mobile_recharge_util"

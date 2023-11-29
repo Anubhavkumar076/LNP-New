@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.FundRequestActivity"
-    android:background="@drawable/background">
+    android:background="@mipmap/background_trial">
 
     <EditText
         android:layout_width="match_parent"
@@ -13,9 +13,10 @@
         android:layout_centerInParent="true"
         android:background="@drawable/input"
         android:inputType="numberDecimal"
-        android:hint="Enter Amount(Rs)"
+        android:hint="Enter Amount (Rs)"
         android:id="@+id/fund_request_edittext"
-        android:layout_margin="2dp"/>
+        android:layout_margin="5dp"
+        android:padding="10dp"/>
 
     <Button
         android:layout_width="match_parent"

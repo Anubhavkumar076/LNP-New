@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.PanCardWebViewActivity">
+    tools:context=".activity.PanCardWebViewActivity"
+    android:background="@mipmap/background_trial">
 
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/pan_card_web"/>
+        android:id="@+id/pan_card_web"
+        android:padding="10dp"/>
 
 </RelativeLayout>

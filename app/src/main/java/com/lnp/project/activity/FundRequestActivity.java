@@ -76,6 +76,10 @@ public class FundRequestActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     Toast.makeText(FundRequestActivity.this, "Fund Added!", Toast.LENGTH_SHORT).show();
                     progressBar.hide();
+                    Intent i = new Intent(FundRequestActivity.this, MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+                    finish();
                 });
             } catch (Exception e) {
                 Log.e("InfoAsyncTask", "Error reading school information", e);

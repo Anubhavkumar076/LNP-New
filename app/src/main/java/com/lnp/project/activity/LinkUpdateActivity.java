@@ -76,7 +76,7 @@ public class LinkUpdateActivity extends AppCompatActivity {
                 } else if (banner.equals("Instagram")) {
                     updateKey = "Instagram";
                 } else if (banner.equals("LNP eKart")) {
-                    updateKey = "LNP eKart";
+                    updateKey = "lnpekart";
                 }
                 updateValue = linkEditText.getText().toString().trim();
                 if(TextUtils.isEmpty(updateValue) || TextUtils.isEmpty(updateKey)) {

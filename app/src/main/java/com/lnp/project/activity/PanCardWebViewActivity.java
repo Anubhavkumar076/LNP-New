@@ -97,7 +97,7 @@ public class PanCardWebViewActivity extends AppCompatActivity {
             String kyctype = getIntent().getStringExtra("kyctype").toString();
             jsonObject.put("kyctype", kyctype);
             String jsonString = jsonObject.toString();
-            if(wallet >= 110l)
+            if(wallet >= 107l)
                 savePANData(refId, firstName.isEmpty()? " " : firstName, middleName.isEmpty() ? " " : middleName, lastName, mode, gender, email.isEmpty() ? " " : email , kyctype);
             else
                 Toast.makeText(PanCardWebViewActivity.this, "You have insufficient balance. Please contact admin for recharge.", Toast.LENGTH_SHORT).show();

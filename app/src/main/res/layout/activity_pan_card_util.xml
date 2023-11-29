@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.PanCardUtilActivity">
+    tools:context=".activity.PanCardUtilActivity"
+    android:background="@mipmap/background_trial">
 
     <GridView
         android:id="@+id/pan_card_util"
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:columnWidth="100dp"
         android:layout_marginTop="3dp"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:gravity="center_horizontal"
         android:padding="7dp"
         android:verticalSpacing="7dp"

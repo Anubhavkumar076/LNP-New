@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.BBPSUtilActivity">
+    tools:context=".activity.BBPSUtilActivity"
+    android:background="@mipmap/background_trial">
 
     <GridView
         android:id="@+id/bbps_util"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.UserInformationActivity"
-    android:background="@drawable/background">
+    android:background="@mipmap/background_trial">
 
     <EditText
         android:layout_width="match_parent"
@@ -15,25 +15,26 @@
         android:textColor="@color/black"
         android:background="@drawable/input"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
-        android:paddingLeft="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
         android:maxLines="1"
         />
 
     <EditText
+        android:id="@+id/last_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/last_name"
-        android:textColor="@color/black"
-        android:hint="Last Name"
         android:layout_below="@id/first_name"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/input"
-        android:layout_margin="5dp"
-        android:paddingLeft="20dp"
+        android:hint="Last Name"
         android:maxLines="1"
-        />
+        android:padding="10dp"
+        android:textColor="@color/black" />
 
 
     <EditText
@@ -44,8 +45,10 @@
         android:layout_below="@id/last_name"
         android:textColor="@color/black"
         android:background="@drawable/input"
-        android:layout_margin="5dp"
-        android:paddingLeft="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
         android:maxLines="1"
         />
 
@@ -57,8 +60,10 @@
         android:background="@drawable/input"
         android:layout_below="@id/city_name"
         android:spinnerMode="dropdown"
-        android:paddingLeft="10dp"
-        android:layout_margin="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
         />
 
     <Spinner
@@ -67,8 +72,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/input"
         android:spinnerMode="dropdown"
-        android:paddingLeft="10dp"
-        android:layout_margin="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
         android:layout_below="@id/state_name"
         />
 
@@ -80,8 +87,10 @@
         android:hint="Phone Number"
         android:layout_below="@id/district_name"
         android:background="@drawable/input"
-        android:layout_margin="5dp"
-        android:paddingLeft="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
         android:maxLines="1"
         />
 
@@ -95,6 +104,9 @@
         android:id="@+id/submit_button"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:layout_margin="5dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"/>
 
 </RelativeLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.PanCardActivity"
-    android:background="@drawable/background">
+    android:background="@mipmap/background_trial">
 
     <EditText
         android:layout_width="match_parent"
@@ -15,10 +15,10 @@
         android:textColor="@color/black"
         android:background="@drawable/input"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:paddingLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:maxLines="1"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
         />
 
     <EditText
@@ -30,9 +30,9 @@
         android:textColor="@color/black"
         android:background="@drawable/input"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:paddingLeft="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
         android:maxLines="1"
         />
 
@@ -45,9 +45,9 @@
         android:textColor="@color/black"
         android:background="@drawable/input"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:paddingLeft="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
         android:maxLines="1"
         />
 
@@ -55,22 +55,26 @@
         android:id="@+id/pan_card_mode"
         android:layout_below="@id/pan_card_last_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@drawable/input"
         android:spinnerMode="dropdown"
-        android:layout_marginTop="30dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
         />
 
     <Spinner
         android:id="@+id/pan_card_gender"
         android:layout_below="@id/pan_card_mode"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@drawable/input"
         android:spinnerMode="dropdown"
-        android:layout_marginTop="30dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
         />
 
     <EditText
@@ -82,21 +86,23 @@
         android:textColor="@color/black"
         android:background="@drawable/input"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:paddingLeft="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="10dp"
         android:maxLines="1"
         />
 
     <Spinner
         android:id="@+id/pan_card_kyc_type"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@drawable/input"
         android:layout_below="@id/pan_card_email"
         android:spinnerMode="dropdown"
-        android:layout_marginTop="30dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
         />
 
     <Button
@@ -109,12 +115,8 @@
         android:id="@+id/pan_card_submit"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:layout_margin="5dp"/>
-
-    <WebView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/pan_card_web"
-        android:layout_below="@id/pan_card_submit"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
 </RelativeLayout>

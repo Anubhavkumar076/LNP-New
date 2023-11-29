@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.AdminPanelActivity"
-    android:background="@drawable/background">
+    android:background="@mipmap/background_trial"
+    android:padding="10dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

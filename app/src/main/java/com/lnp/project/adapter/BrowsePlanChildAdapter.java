@@ -379,7 +379,9 @@ public class BrowsePlanChildAdapter extends RecyclerView
 
                     progressBar.hide();
                     Toast.makeText(cxt, "Recharge done successfully!", Toast.LENGTH_SHORT).show();
-
+                    Intent i = new Intent(cxt, MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    cxt.startActivity(i);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 } catch (JsonProcessingException e) {

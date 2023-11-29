@@ -1,5 +1,6 @@
 package com.lnp.project.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lnp.project.R;
 import com.lnp.project.activity.AdminUserRetailerVerificationDetails;
+import com.lnp.project.activity.UserProfile;
+import com.lnp.project.dto.SliderData;
 import com.lnp.project.dto.UserNameAndIdDto;
 
 import java.util.List;
@@ -37,7 +40,7 @@ public class UserSearchAdapter extends RecyclerView.Adapter<UserSearchAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String firstName = listdata.get(position).getFirstName().toString();
         String secondName = listdata.get(position).getSecondName().toString();
 
@@ -46,11 +49,9 @@ public class UserSearchAdapter extends RecyclerView.Adapter<UserSearchAdapter.Vi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(position == 0) {
-                    intent[0] =  new Intent(context, AdminUserRetailerVerificationDetails.class);
-                    intent[0].putExtra("UserVerificationId", listdata.get(position).getId());
-                    context.startActivity(intent[0]);
-                }
+                intent[0] =  new Intent(context, UserProfile.class);
+                intent[0].putExtra("usersearchid", listdata.get(position).getId());
+                context.startActivity(intent[0]);
             }
         });
     }

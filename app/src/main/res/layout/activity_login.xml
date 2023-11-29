@@ -3,7 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@mipmap/background_trial">
+
+    <!-- Circular Image View  -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        app:civ_border_width="4dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/logo_icon"
+        app:civ_border_color="#FF000000"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_above="@id/login_email"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/lnp_logo_image"/>
 
 
     <EditText
@@ -13,7 +26,7 @@
         android:hint="Email Id"
         android:textColor="@color/black"
         android:background="@drawable/input"
-        android:layout_marginTop="250dp"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:paddingLeft="20dp"
@@ -56,5 +69,19 @@
         android:gravity="center"
         android:textStyle="bold"
         android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/contact_us_mobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:padding="2sp"
+        android:text="Please mail to Customercare@lnpminibank.com in case of any issue."
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

@@ -60,9 +60,9 @@ public class BBPSUtilActivity extends AppCompatActivity {
                     "Landline", "Electricity", "Cable", "Fastag", "LPG", "View Entries"};
 
         int utilityImage[]={
-                R.drawable.loans, R.drawable.caservice, R.drawable.caservice, R.drawable.caservice,
-                R.drawable.caservice, R.drawable.caservice, R.drawable.caservice, R.drawable.caservice,
-                R.drawable.caservice, R.drawable.caservice, R.drawable.caservice, R.drawable.caservice
+                R.mipmap.emi, R.mipmap.broadband, R.mipmap.bill, R.mipmap.insurance,
+                R.mipmap.water, R.mipmap.dish, R.mipmap.telephone, R.mipmap.energy,
+                R.mipmap.wiring, R.mipmap.fastag, R.mipmap.lpg, R.mipmap.view
         };
 
         ImageAdapter utilityAdapter = new ImageAdapter(BBPSUtilActivity.this, utilityImage, utilityName);

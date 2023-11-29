@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +59,8 @@ public class BBPSActivity extends AppCompatActivity {
 
     Button fetchBill, payBill;
     TextView nameTextView, amountTextView;
+
+    RelativeLayout bbpsrelative;
 
     Spinner bbpsOperatorSpinner;
 
@@ -104,6 +107,7 @@ public class BBPSActivity extends AppCompatActivity {
         nameTextView = findViewById(R.id.bbps_fetch_bill_name);
         amountTextView = findViewById(R.id.bbps_fetch_bill_amount);
         payBill = findViewById(R.id.bbps_pay_bill);
+        bbpsrelative = findViewById(R.id.bbps_relative);
         progressBar=new ProgressDialog(this);
 
         Intent i = getIntent();
@@ -182,9 +186,7 @@ public class BBPSActivity extends AppCompatActivity {
 
 
 
-                        nameTextView.setVisibility(View.VISIBLE);
-                        amountTextView.setVisibility(View.VISIBLE);
-                        payBill.setVisibility(View.VISIBLE);
+                        bbpsrelative.setVisibility(View.VISIBLE);
 
                         nameTextView.setText("Name: "+ name);
                         amountTextView.setText("Bill Amount: "+ amount);
@@ -308,7 +310,7 @@ public class BBPSActivity extends AppCompatActivity {
                     String message = respObj.getString("message");
                     saveBBPSData(operator, mobileNumber, rupees, random, mode, bbpsItemResponseDtoList.get(0).getCategory(), billFetch, userIdInt);
                     progressBar.hide();
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 //                    message = respObj.getString("message");
 //                    ackNo = respObj.getString("ackno");
 
@@ -447,6 +449,8 @@ public class BBPSActivity extends AppCompatActivity {
                     progressBar.hide();
                     Toast.makeText(BBPSActivity.this, "Recharge done successfully!", Toast.LENGTH_SHORT).show();
 
+                    Intent i = new Intent(BBPSActivity.this, MainActivity.class);
+                    startActivity(i);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 } catch (JsonProcessingException e) {

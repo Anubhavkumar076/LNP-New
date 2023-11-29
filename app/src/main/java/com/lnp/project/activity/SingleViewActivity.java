@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +44,7 @@ import java.util.Locale;
 public class SingleViewActivity extends AppCompatActivity {
     private EditText fullName, address,mobileNumber, loanAmount, savingAmount;
     private Button submit;
+    private TextView singleViewTextTerm, singleViewHeadingTextTerm;
     private Spinner loanCategory, caServiceType, engineerBuildingType, engineerServiceType, tenureSpinner, loanTypeSpinner;
 
     SharedPreferences sp;
@@ -62,6 +64,10 @@ public class SingleViewActivity extends AppCompatActivity {
     // Reference for Firebase.
     DatabaseReference databaseReference;
 
+    String loanTerms, otherLoanTerms, businessLoanTerms, housingLoanTerms, vehicleLoanTerms,
+        goldLoanTerms, educationLoanTerms;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +84,8 @@ public class SingleViewActivity extends AppCompatActivity {
         engineerBuildingType = findViewById(R.id.engineer_building_type_edittext);
         engineerServiceType = findViewById(R.id.engineer_service_type_edittext);
         tenureSpinner = findViewById(R.id.tenure_edittext);
+        singleViewTextTerm = findViewById(R.id.single_view_text_term);
+        singleViewHeadingTextTerm = findViewById(R.id.single_view_text_heading);
         firebaseDatabase = FirebaseDatabase.getInstance();
         savingAmount.addTextChangedListener(onTextChangedListener());
         loanAmount.addTextChangedListener(onTextChangedListener());
@@ -97,24 +105,10 @@ public class SingleViewActivity extends AppCompatActivity {
 
         // passing this array list inside our adapter class.
         SliderAdapter adapter = new SliderAdapter(this, sliderDataArrayList);
-
-        // below method is used to set auto cycle direction in left to
-        // right direction you can change according to requirement.
         sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
-
-        // below method is used to
-        // setadapter to sliderview.
         sliderView.setSliderAdapter(adapter);
-
-        // below method is use to set
-        // scroll time in seconds.
         sliderView.setScrollTimeInSec(3);
-
-        // to set it scrollable automatically
-        // we use below method.
         sliderView.setAutoCycle(true);
-
-        // to start autocycle below method is used.
         sliderView.startAutoCycle();
 
         new Thread(() -> {
@@ -147,9 +141,11 @@ public class SingleViewActivity extends AppCompatActivity {
 //        contactFormSprinner.setAdapter(adapter);
 
         String formType = getIntent().getStringExtra("service").trim();
+        loanTerms = "LNP offers financial guidance on a range of loans available in the Loan Category" +
+                " option. Kindly choose a specific loan category to view detailed terms corresponding to your particular loan query.";
 
         //LOANS
-        String[] loanItems = new String[]{"Select Loan Category","Personal Loan", "Business Loan", "Housing Loan", "Vehicle Loan", "Gold Loan", "Education Loan"};
+        String[] loanItems = new String[]{"Select Loan Category", "Business Loan", "Housing Loan", "Vehicle Loan", "Gold Loan", "Education Loan", "Other Loan"};
         ArrayAdapter<String> loanItemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, loanItems);
         loanCategory.setAdapter(loanItemsAdapter);
 
@@ -181,10 +177,49 @@ public class SingleViewActivity extends AppCompatActivity {
         loanCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 3) {
-                    loanTypeSpinner.setVisibility(View.VISIBLE);
-                } else {
+                if (position == 0) {
                     loanTypeSpinner.setVisibility(View.GONE);
+                    singleViewTextTerm.setText(loanTerms);
+                } else if(position == 1) {
+                    businessLoanTerms = "We offer financial guidance on securing business loans to address diverse " +
+                            "expenses related to various business activities such as to setup new infrastructure, " +
+                            "or to manage the operating costs and other allied activities." +
+                            " Leveraging an extensive network of financial experts and NBFC Banks, LNP is well-equipped to address your queries and ensure the optimal solution for your needs.";
+                    loanTypeSpinner.setVisibility(View.GONE);
+                    singleViewTextTerm.setText(businessLoanTerms);
+                } else if(position == 2) {
+                    housingLoanTerms = "We offer financial guidance on securing Housing loans to address diverse " +
+                            "expenses related to various Housing activities such as to make new house, " +
+                            "or to have house renovation and other allied activities." +
+                            " Leveraging an extensive network of financial experts and NBFC Banks, LNP is well-equipped to address your queries and ensure the optimal solution for your needs.";
+                    loanTypeSpinner.setVisibility(View.VISIBLE);
+                    singleViewTextTerm.setText(housingLoanTerms);
+                } else if(position == 3) {
+                    vehicleLoanTerms = "We offer financial guidance on securing Vehicle loans to address diverse " +
+                            "expenses related to Vehicle operations such as to buy new vehicle, " +
+                            "or to have vehicle renovation and other allied activities." +
+                            " Leveraging an extensive network of financial experts and NBFC Banks, LNP is well-equipped to address your queries and ensure the optimal solution for your needs.";
+                    loanTypeSpinner.setVisibility(View.GONE);
+                    singleViewTextTerm.setText(vehicleLoanTerms);
+                } else if(position == 4) {
+                    goldLoanTerms = "We offer financial guidance on securing Gold loans as per your need." +
+                        " Leveraging an extensive network of financial experts and NBFC Banks, LNP is well-equipped to address your queries and ensure the optimal solution for your needs.";
+                    loanTypeSpinner.setVisibility(View.GONE);
+                    singleViewTextTerm.setText(goldLoanTerms);
+                }  else if(position == 5) {
+                    educationLoanTerms = "We offer financial guidance on securing Education loans as per your need and courses." +
+                            " Leveraging an extensive network of financial experts and NBFC Banks, LNP is well-equipped to address your queries and ensure the optimal solution for your needs.";
+                    loanTypeSpinner.setVisibility(View.GONE);
+                    singleViewTextTerm.setText(educationLoanTerms);
+                }  else if(position == 6) {
+                    otherLoanTerms = "We offer financial guidance on securing different other kind of other loans such as " +
+                            " Microfinance Loans, LAP to address diverse " +
+                            "expenses related to users need  and other allied activities." +
+                            " Leveraging an extensive network of financial experts and NBFC Banks, " +
+                            "LNP is well-equipped to address your queries and ensure the optimal solution " +
+                            "for your needs.";
+                    loanTypeSpinner.setVisibility(View.GONE);
+                    singleViewTextTerm.setText(otherLoanTerms);
                 }
             }
 
@@ -194,7 +229,8 @@ public class SingleViewActivity extends AppCompatActivity {
             }
         });
 
-        if(formType.equals("Loan Services")) {
+        if(formType.equals("Other Services")) {
+            singleViewTextTerm.setText(loanTerms);
             loanAmount.setVisibility(View.VISIBLE);
             loanCategory.setVisibility(View.VISIBLE);
             loanTypeSpinner.setVisibility(View.GONE);
@@ -204,6 +240,8 @@ public class SingleViewActivity extends AppCompatActivity {
             caServiceType.setVisibility(View.GONE);
             savingAmount.setVisibility(View.GONE);
         } else if (formType.equals("CA Services")) {
+            singleViewHeadingTextTerm.setVisibility(View.GONE);
+            singleViewTextTerm.setVisibility(View.GONE);
             loanAmount.setVisibility(View.GONE);
             loanCategory.setVisibility(View.GONE);
             loanTypeSpinner.setVisibility(View.GONE);
@@ -213,6 +251,8 @@ public class SingleViewActivity extends AppCompatActivity {
             caServiceType.setVisibility(View.VISIBLE);
             savingAmount.setVisibility(View.GONE);
         } else if (formType.equals("Engineer Services")) {
+            singleViewHeadingTextTerm.setVisibility(View.GONE);
+            singleViewTextTerm.setVisibility(View.GONE);
             loanAmount.setVisibility(View.GONE);
             loanCategory.setVisibility(View.GONE);
             loanTypeSpinner.setVisibility(View.GONE);
@@ -222,6 +262,8 @@ public class SingleViewActivity extends AppCompatActivity {
             caServiceType.setVisibility(View.GONE);
             savingAmount.setVisibility(View.GONE);
         } else if (formType.equals("CIBIL Score")) {
+            singleViewHeadingTextTerm.setVisibility(View.GONE);
+            singleViewTextTerm.setVisibility(View.GONE);
             loanAmount.setVisibility(View.GONE);
             loanCategory.setVisibility(View.GONE);
             loanTypeSpinner.setVisibility(View.GONE);
@@ -231,6 +273,8 @@ public class SingleViewActivity extends AppCompatActivity {
             caServiceType.setVisibility(View.GONE);
             savingAmount.setVisibility(View.GONE);
         } else {
+            singleViewHeadingTextTerm.setVisibility(View.GONE);
+            singleViewTextTerm.setVisibility(View.GONE);
             loanAmount.setVisibility(View.GONE);
             loanCategory.setVisibility(View.GONE);
             loanTypeSpinner.setVisibility(View.GONE);

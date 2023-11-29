@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.RetailerVerificationActivity"
-    android:background="@drawable/background">
+    android:background="@mipmap/background_trial">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/input_dist"
-        android:layout_margin="2dp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
         android:id="@+id/upload_pan_relative">
 
         <TextView
@@ -50,9 +51,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/input_dist"
-        android:layout_marginRight="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
         android:layout_below="@id/upload_pan_relative"
         android:id="@+id/upload_aadhar_relative">
 
@@ -110,6 +112,7 @@
         android:id="@+id/upload_verification_button"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:layout_margin="5dp"/>
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
 
 </RelativeLayout>

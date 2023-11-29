@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.PanStatusActivity"
-    android:background="@drawable/background">
+    android:background="@mipmap/background_trial">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/input"
         android:textSize="16sp"
-        android:padding="5dp"
-        android:layout_margin="4dp"
+        android:padding="10dp"
+        android:layout_margin="10dp"
         >
 
         <TextView

@@ -44,8 +44,7 @@
         android:id="@+id/recharge_button"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:layout_margin="5dp"
-        android:visibility="gone"/>
+        android:layout_margin="5dp"/>
 
 
 </RelativeLayout>

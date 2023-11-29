@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.lnp.project.R;
 import com.lnp.project.adapter.AdminRecyclerAdapter;
@@ -27,7 +28,7 @@ public class AdminRetailerVerification extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     EditText mEditText;
-    Button searchButton;
+    ImageButton searchButton;
 
     private static final String URL = "jdbc:mysql://database-lnp.cz2mgaxvmcml.ap-south-1.rds.amazonaws.com:3306/lnp-schema";
     private static final String USER = "admin";

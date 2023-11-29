@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AdminDistrictActivity">
+    tools:context=".activity.AdminDistrictActivity"
+    android:background="@mipmap/background_trial">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/input_dist"
-        android:layout_margin="2dp"
-        android:id="@+id/admin_district_delete_relative">
+        android:layout_marginTop="20dp"
+        android:id="@+id/admin_district_delete_relative"
+        android:padding="10dp"
+        android:layout_margin="5dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -33,6 +36,7 @@
         android:layout_marginTop="30dp"
         android:layout_margin="5dp"
         android:layout_marginBottom="5dp"
+        android:padding="5dp"
         android:layout_below="@id/admin_district_delete_text"
         />
 
@@ -44,6 +48,7 @@
         android:background="@drawable/input"
         android:spinnerMode="dropdown"
         android:layout_marginTop="30dp"
+        android:padding="5dp"
         android:layout_margin="5dp"
         android:layout_marginBottom="5dp"
         />
@@ -65,9 +70,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/input_dist"
-        android:layout_margin="5dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/admin_district_add_relative"
-        android:layout_below="@id/admin_district_delete_relative">
+        android:layout_below="@id/admin_district_delete_relative"
+        android:padding="10dp"
+        android:layout_margin="5dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -87,6 +94,7 @@
         android:background="@drawable/input"
         android:spinnerMode="dropdown"
         android:layout_marginTop="30dp"
+        android:padding="5dp"
         android:layout_margin="5dp"
         android:layout_marginBottom="5dp"
         android:layout_below="@id/admin_district_add_text"

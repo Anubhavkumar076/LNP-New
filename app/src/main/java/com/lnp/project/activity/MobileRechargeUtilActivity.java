@@ -22,7 +22,7 @@ public class MobileRechargeUtilActivity extends AppCompatActivity {
         String utilityName[]= {"Recharge", "View Recharge"};
 
         int utilityImage[]={
-                R.drawable.loans, R.drawable.caservice
+                R.mipmap.recharge, R.mipmap.view
         };
 
         ImageAdapter utilityAdapter = new ImageAdapter(MobileRechargeUtilActivity.this, utilityImage, utilityName);

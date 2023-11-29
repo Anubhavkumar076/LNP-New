@@ -23,7 +23,7 @@ public class PanCardUtilActivity extends AppCompatActivity {
         String utilityName[]= {"Create PAN", "PAN Status"};
 
         int utilityImage[]={
-                R.drawable.loans, R.drawable.caservice
+                R.mipmap.pan, R.mipmap.view
 
         };
 

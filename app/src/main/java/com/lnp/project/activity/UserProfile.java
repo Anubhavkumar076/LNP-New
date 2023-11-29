@@ -29,13 +29,17 @@ public class UserProfile extends AppCompatActivity {
     private static final String PASSWORD = "adminlnp";
 
     SharedPreferences sp;
+    Integer userIdInt = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
         sp = getSharedPreferences("login",MODE_PRIVATE);
-        Integer userIdInt = Integer.parseInt(sp.getString("userId", ""));
+
+        userIdInt = getIntent().getIntExtra("usersearchid", 0);
+        if (userIdInt == 0)
+            userIdInt = Integer.parseInt(sp.getString("userId", ""));
 
         userId = findViewById(R.id.user_profile_user_id);
         userName = findViewById(R.id.user_profile_name);

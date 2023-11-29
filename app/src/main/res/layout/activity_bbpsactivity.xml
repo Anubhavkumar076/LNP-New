@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.BBPSActivity"
-    android:background="@drawable/background">
+    android:background="@mipmap/background_trial"
+    android:padding="10dp">
 
     <EditText
         android:layout_width="match_parent"
@@ -15,7 +16,7 @@
         android:hint="Number"
         android:background="@drawable/input"
         android:layout_margin="5dp"
-        android:paddingLeft="20dp"
+        android:padding="10dp"
         android:maxLines="1"
         />
 
@@ -26,6 +27,7 @@
         android:background="@drawable/input"
         android:spinnerMode="dropdown"
         android:layout_marginTop="30dp"
+        android:padding="10dp"
         android:layout_margin="5dp"
         android:layout_marginBottom="5dp"
         android:layout_below="@id/bbps_number"
@@ -71,35 +73,49 @@
         android:textColor="#ffffff"
         android:layout_margin="5dp"/>
 
-    <TextView
-        android:id="@+id/bbps_fetch_bill_name"
-        android:layout_below="@id/bbps_fetch_bill_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:padding="5sp"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/bbps_fetch_bill_amount"
-        android:layout_below="@id/bbps_fetch_bill_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:padding="5sp"
-        android:visibility="gone"/>
-
-    <Button
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/button"
-        android:layout_below="@id/bbps_fetch_bill_amount"
-        android:layout_centerHorizontal="true"
-        android:text="Pay Bill"
-        android:id="@+id/bbps_pay_bill"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
-        android:layout_margin="5dp"
-        android:visibility="gone"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/bbps_relative"
+        android:layout_below="@id/bbps_fetch_bill_button"
+        android:background="@drawable/input"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/bbps_fetch_bill_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:padding="5sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/bbps_fetch_bill_amount"
+            android:layout_below="@id/bbps_fetch_bill_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:padding="5sp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/button"
+            android:layout_below="@id/bbps_fetch_bill_amount"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Pay Bill"
+            android:id="@+id/bbps_pay_bill"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:layout_margin="5dp"/>
+    </RelativeLayout>
 
 </RelativeLayout>
