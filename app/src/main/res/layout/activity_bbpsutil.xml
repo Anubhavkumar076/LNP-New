@@ -19,7 +19,7 @@
         android:verticalSpacing="7dp"
         android:horizontalSpacing="7dp"
         android:numColumns="4"
-        android:background="@drawable/grid_background"
+        android:background="@mipmap/background_trial"
         android:stretchMode="columnWidth"
         >
     </GridView>

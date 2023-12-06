@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.RetailerConfigActivity"
+    android:background="@mipmap/background_trial"
+    android:padding="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/background_trial"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:id="@+id/retailer_config_relative">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:id="@+id/retailer_config_name_layout"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/retailer_config_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="2"
+                android:textStyle="bold"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:id="@+id/retailer_config_details"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:layout_below="@id/retailer_config_name_layout"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="1"
+                android:text="ID"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/retailer_config_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="2"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:id="@+id/retailer_config_recharge"
+            android:layout_below="@id/retailer_config_details"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="1"
+                android:text="Recharge"
+                android:textStyle="bold"
+                android:id="@+id/retailer_config_recharge_label"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="1"
+                android:id="@+id/retailer_config_recharge_comm"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="1"
+                android:id="@+id/retailer_config_recharge_comm_edit"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:id="@+id/retailer_config_pan"
+            android:layout_below="@id/retailer_config_recharge"
+            android:layout_margin="4dp"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="1"
+                android:text="PAN"
+                android:textStyle="bold"
+                android:id="@+id/retailer_config_pan_label"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="1"
+                android:id="@+id/retailer_config_pan_comm"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="1"
+                android:id="@+id/retailer_config_pan_comm_edit"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:id="@+id/retailer_config_bbps"
+            android:layout_below="@id/retailer_config_pan"
+            android:layout_margin="4dp"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="1"
+                android:text="BBPS"
+                android:textStyle="bold"
+                android:id="@+id/retailer_config_bbps_label"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="1"
+                android:id="@+id/retailer_config_bbps_comm"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:layout_weight="1"
+                android:id="@+id/retailer_config_bbps_comm_edit"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/button"
+            android:layout_below="@id/retailer_config_bbps"
+            android:padding="10dp"
+            android:text="Update Commission"
+            android:id="@+id/retailer_config_comm_btn"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:layout_margin="5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/background_trial"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:layout_below="@id/retailer_config_relative">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/retailer_config_fund_label"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="ADD FUND"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"/>
+
+        <EditText
+            android:id="@+id/retailer_config_fund_edit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/retailer_config_fund_label"
+            android:textSize="16sp"
+            android:padding="5sp"
+            android:hint="Enter Amount(Rs)"
+            android:background="@drawable/input"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/button"
+            android:layout_below="@id/retailer_config_fund_edit"
+            android:padding="10dp"
+            android:text="ADD FUND"
+            android:id="@+id/retailer_config_add_fund_btn"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:layout_margin="5dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

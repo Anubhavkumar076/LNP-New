@@ -61,6 +61,10 @@ public class AdminPanelActivity extends AppCompatActivity {
         myListData.add("Queries");
         myListData.add("Retailer Verification");
         myListData.add("User Search");
+        myListData.add("Fund Request Approval");
+        myListData.add("All Fund Request");
+        myListData.add("Retailer Config");
+        myListData.add("Websites Config");
 
         AdminRecyclerAdapter adapter = new AdminRecyclerAdapter(AdminPanelActivity.this, myListData);
         mRecyclerView.setHasFixedSize(true);

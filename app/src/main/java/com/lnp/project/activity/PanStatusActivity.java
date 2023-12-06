@@ -17,7 +17,9 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -82,19 +84,27 @@ public class PanStatusActivity extends AppCompatActivity {
         progressDialog.setMessage("Wait for a while");
         progressDialog.show();
 
-        String url = "https://paysprint.in/service-api/api/v1/service/pan/V2/pan_status";
+        String url = "http://www.techfolkapi.in/Paysprint/PanCardStatusEnquiry";
+        JSONObject params = new JSONObject();
+        // on below line we are passing our key
+        // and value pair to our parameters.
+        try {
+            params.put("userId", "TECHFOLK");
+            params.put("refId", refId);
+            params.put("panType", "NEW");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(PanStatusActivity.this);
 
-        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(JSONObject response) {
 
                 try {
-                    // on below line we are parsing the response
-                    // to json object to extract data from it.
-                    JSONObject respObj = new JSONObject(response);
+                    JSONObject respObj = response.getJSONObject("responseData");
 
                     message = respObj.getString("message");
 
@@ -115,19 +125,9 @@ public class PanStatusActivity extends AppCompatActivity {
 
         }) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("refid", refId);
-                return params;
-            }
-
-            @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
-                JWTKey jwtKey = new JWTKey();
-                String jwtKeyString = jwtKey.getToken();
-                params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                params.put("Token", jwtKeyString);
+                params.put("partnerKey", "TechFolk@2023@#8376852504");
 
                 return params;
             }
@@ -165,17 +165,27 @@ public class PanStatusActivity extends AppCompatActivity {
                 }
 
                 if (!statusUpdated) {
-                    String txnUrl = "https://paysprint.in/service-api/api/v1/service/pan/V2/txn_status";
+                    String txnUrl = "http://www.techfolkapi.in/Paysprint/PanCardTransactionStatus";
+                    JSONObject txnparam = new JSONObject();
+                    // on below line we are passing our key
+                    // and value pair to our parameters.
+                    try {
+                        txnparam.put("userId", "TECHFOLK");
+                        txnparam.put("refId", refId);
+                        txnparam.put("panType", "NEW");
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
 
                     // creating a new variable for our request queue
                     RequestQueue txnQueue = Volley.newRequestQueue(PanStatusActivity.this);
 
-                    StringRequest txnRequest = new StringRequest(Request.Method.POST, txnUrl, new com.android.volley.Response.Listener<String>() {
+                    JsonObjectRequest txnRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
                         @Override
-                        public void onResponse(String response) {
-
+                        public void onResponse(JSONObject response) {
                             try {
-                                JSONObject respObj = new JSONObject(response);
+
+                                JSONObject respObj = response.getJSONObject("responseData");
 
                                 statusUpdated = true;
                                 JSONObject jsonObject = respObj.getJSONObject("data");
@@ -243,20 +253,11 @@ public class PanStatusActivity extends AppCompatActivity {
                         }
 
                     }) {
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String, String> params = new HashMap<>();
-                            params.put("refid", refId);
-                            return params;
-                        }
 
                         @Override
                         public Map<String, String> getHeaders() throws AuthFailureError {
                             Map<String, String>  params = new HashMap<String, String>();
-                            JWTKey jwtKey = new JWTKey();
-                            String jwtKeyString = jwtKey.getToken();
-                            params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                            params.put("Token", jwtKeyString);
+                            params.put("partnerKey", "TechFolk@2023@#8376852504");
 
                             return params;
                         }

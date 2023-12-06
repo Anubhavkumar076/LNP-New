@@ -138,7 +138,7 @@ public class PanCardWebViewActivity extends AppCompatActivity {
             try {
 
                 // on below line creating a url to post the data.
-                URL url = new URL("https://paysprint.in/service-api/api/v1/service/pan/V2/generateurl");
+                URL url = new URL("http://www.techfolkapi.in/Paysprint/NewPanCard");
 
                 // on below line opening the connection.
                 HttpURLConnection client = (HttpURLConnection) url.openConnection();
@@ -146,13 +146,9 @@ public class PanCardWebViewActivity extends AppCompatActivity {
                 // on below line setting method as post.
                 client.setRequestMethod("POST");
 
-                JWTKey jwtKey = new JWTKey();
-                String jwtKeyString = jwtKey.getToken();
                 // on below line setting content type and accept type.
                 client.setRequestProperty("Content-Type", "application/json");
-                client.setRequestProperty("Accept", "application/json");
-                client.setRequestProperty("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                client.setRequestProperty("Token", jwtKeyString);
+                client.setRequestProperty("partnerKey", "TechFolk@2023@#8376852504");
 
 //                // on below line setting client.
                 client.setDoOutput(true);

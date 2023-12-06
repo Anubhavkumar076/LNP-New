@@ -194,10 +194,8 @@ public class BrowsePlanChildAdapter extends RecyclerView
     }
 
     private void doRecharge(Integer operatorId, Integer rupees, String mobileNumber, Integer userIdInt) {
-        JWTKey jwtKey = new JWTKey();
-        String jwtKeyString = jwtKey.getToken();
         // url to post our data
-        String url = "https://paysprint.in/service-api/api/v1/service/recharge/recharge/dorecharge";
+        String url = "http://www.techfolkapi.in/Paysprint/DoRecharge";
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(cxt);
@@ -205,50 +203,36 @@ public class BrowsePlanChildAdapter extends RecyclerView
         // on below line we are passing our key
         // and value pair to our parameters.
         try {
-            params.put("operator", operatorId);
+            params.put("userId", "TECHFOLK");
+            params.put("operatorid", operatorId);
             params.put("canumber", Long.valueOf(mobileNumber));
             params.put("amount", rupees);
             random = (int) Math.round(Math.random() * 1000000000);
-            params.put("referenceid", String.valueOf(random));
+            params.put("transactionId", String.valueOf(random));
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
 
+//        '{"userId":"TECHFOLK","operatorid":"1",
+//    "canumber":"8376852504","amount":"100","transactionId":"35788888888"}'
+
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONObject respObj) {
+            public void onResponse(JSONObject response) {
 //                response[0] = respObj;
                 try {
-                    StringBuilder queryToCreate = new StringBuilder();
-                    Instant instant = Instant.now();
-                    long timeStampMillis = instant.toEpochMilli();
-                    ObjectMapper obj = new ObjectMapper();
-                    obj.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-                    obj.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-                    String requestJson = obj.writeValueAsString(params);
-                    String responseJson = obj.writeValueAsString(respObj);
-                    queryToCreate.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , '"+ requestJson
-                            +"', '"+ responseJson +"', '"+ userIdInt +"', "+ timeStampMillis +")");
-
-                    new Thread(() -> {
-                        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                            Statement statement = connection.createStatement();
-                            statement.executeUpdate(queryToCreate.toString());
-
-                        } catch (Exception e) {
-                            Log.e("InfoAsyncTask", "Error reading school information", e);
-                        }
-
-                    }).start();
+                    JSONObject respObj = response.getJSONObject("responseData");
                     responseCode = respObj.getInt("response_code");
                     message = respObj.getString("message");
                     ackNo = respObj.getString("ackno");
 
-                    saveRechargeData(String.valueOf(operatorId), mobileNumber, String.valueOf(rupees),
-                            String.valueOf(random), ackNo, userIdInt);
+                    Toast.makeText(cxt.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+                    if(responseCode.equals(1)) {
+                        saveRechargeData(String.valueOf(operatorId), mobileNumber, String.valueOf(rupees),
+                                String.valueOf(random), ackNo, userIdInt);
+                    }
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -262,8 +246,7 @@ public class BrowsePlanChildAdapter extends RecyclerView
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                params.put("Token", jwtKeyString);
+                params.put("partnerKey", "TechFolk@2023@#8376852504");
 
                 return params;
             }
@@ -302,10 +285,8 @@ public class BrowsePlanChildAdapter extends RecyclerView
     }
 
     private void rechargeStatusEnquiry(Integer referenceId, Integer rechargeInfoId, Integer userIdInt) {
-        JWTKey jwtKey = new JWTKey();
-        String jwtKeyString = jwtKey.getToken();
         // url to post our data
-        String url = "https://paysprint.in/service-api/api/v1/service/recharge/recharge/status";
+        String url = "http://www.techfolkapi.in/Paysprint/RechargeStatusEnquiry";
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(cxt);
@@ -313,6 +294,7 @@ public class BrowsePlanChildAdapter extends RecyclerView
         // on below line we are passing our key
         // and value pair to our parameters.
         try {
+            params.put("userId", "TECHFOLK");
             params.put("referenceid", referenceId);
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -320,30 +302,10 @@ public class BrowsePlanChildAdapter extends RecyclerView
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONObject respObj) {
+            public void onResponse(JSONObject response) {
                 try {
 
-                    StringBuilder query = new StringBuilder();
-                    Instant instant = Instant.now();
-                    long timeStampMillis = instant.toEpochMilli();
-                    ObjectMapper obj = new ObjectMapper();
-                    obj.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-                    obj.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-                    String requestJson = obj.writeValueAsString(params);
-                    String responseJson = obj.writeValueAsString(respObj);
-                    query.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , '"+ requestJson
-                            +"', '"+ responseJson +"', '"+ userIdInt +"', "+ timeStampMillis +")");
-
-                    new Thread(() -> {
-                        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                            Statement statement = connection.createStatement();
-                            statement.executeUpdate(query.toString());
-
-                        } catch (Exception e) {
-                            Log.e("InfoAsyncTask", "Error reading school information", e);
-                        }
-
-                    }).start();
+                    JSONObject respObj = response.getJSONObject("responseData");
 
 //                    responseCode = respObj.getInt("response_code");
                     message = respObj.getString("message");
@@ -364,10 +326,24 @@ public class BrowsePlanChildAdapter extends RecyclerView
                             + refundtxnid +"')");
                     new Thread(() -> {
                         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+
+                            String sql = "Select * from lnp.lnp_user where idlnp_user_id = '"+userIdInt;
                             Statement statement = connection.createStatement();
+                            ResultSet rs = statement.executeQuery(sql);
+                            Double rechargeCom = null;
+                            while (rs.next()) {
+                                rechargeCom = rs.getDouble("lnp_user_recharge_comm");
+
+                            }
+                            statement = connection.createStatement();
                             statement.executeUpdate(queryToCreate.toString());
-                            amount[0] = amount[0] - comm;
-                            String sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund - "+ amount[0] +" where idlnp_user_id = "+ userIdInt;
+
+                            Double commission = (Double) comm/100 * rechargeCom;
+                            Double finalAmount = amount[0] - commission;
+
+                            statement = connection.createStatement();
+                            statement.executeUpdate(queryToCreate.toString());
+                            sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund - "+ finalAmount +" where idlnp_user_id = "+ userIdInt;
                             Statement amountUpdate = connection.createStatement();
                             amountUpdate.executeUpdate(sql);
 
@@ -384,8 +360,6 @@ public class BrowsePlanChildAdapter extends RecyclerView
                     cxt.startActivity(i);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
                 }
             }
         }, new com.android.volley.Response.ErrorListener() {
@@ -398,8 +372,7 @@ public class BrowsePlanChildAdapter extends RecyclerView
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                params.put("Token", jwtKeyString);
+                params.put("partnerKey", "TechFolk@2023@#8376852504");
 
                 return params;
             }

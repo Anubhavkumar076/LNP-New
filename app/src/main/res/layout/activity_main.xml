@@ -2,102 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/background_trial">
 
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
-        android:id="@+id/main_card_view">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:id="@+id/main_linear"
-            android:background="@drawable/input"
-            android:layout_margin="5dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/credit_balance_text"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:background="#6DA3BC"
-                android:padding="10dp"
-                android:layout_margin="10dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/debit_card_balance"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:background="#6DA3BC"
-                android:padding="10dp"
-                android:layout_margin="10dp"/>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container"
+        android:layout_above="@id/bottom_navigation"/>
 
 
-    <GridView
-        android:id="@+id/gridView"
-        android:layout_below="@id/main_card_view"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnWidth="100dp"
-        android:layout_marginTop="3dp"
-        android:layout_margin="5dp"
-        android:gravity="center_horizontal"
-        android:padding="7dp"
-        android:verticalSpacing="7dp"
-        android:horizontalSpacing="7dp"
-        android:numColumns="4"
-        android:background="@drawable/grid_background"
-        android:stretchMode="columnWidth"
-        >
-    </GridView>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_below="@id/gridView"
-        android:id="@+id/main_retailer_text"
-        android:background="@color/black"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textAlignment="center"
-        android:padding="3dp"
-        android:textStyle="bold"
-        android:text="PLEASE CLICK HERE TO BECOME RETAILER!"
-        android:textColor="#CA0404"
-        android:visibility="gone"/>
-
-    <GridView
-        android:id="@+id/utility_main_grid"
-        android:layout_below="@id/main_retailer_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnWidth="100dp"
-        android:layout_marginTop="3dp"
-        android:layout_margin="5dp"
-        android:gravity="center_horizontal"
-        android:padding="7dp"
-        android:verticalSpacing="7dp"
-        android:horizontalSpacing="7dp"
-        android:numColumns="4"
-        android:background="@drawable/grid_background"
-        android:stretchMode="columnWidth"
-        >
-    </GridView>
-
+        android:layout_height="50dp"
+        android:id="@+id/bottom_navigation"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background"
+        app:menu="@menu/menu_bottom_navigation"/>
 </RelativeLayout>

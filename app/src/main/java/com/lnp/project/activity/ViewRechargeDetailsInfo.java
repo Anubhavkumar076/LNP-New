@@ -73,7 +73,7 @@ public class ViewRechargeDetailsInfo extends AppCompatActivity {
                     viewRechargeInfoDto.setRefId("Ref ID: "+ rs.getString("recharge_info_ref_id"));
                     viewRechargeInfoDto.setOperator("Operator: "+ rs.getString("recharge_info_details_operator_name"));
                     viewRechargeInfoDto.setUserName("Username: "+ rs.getString("lnp_user_information_first_name") +" "+ rs.getString("lnp_user_information_second_name"));
-                    viewRechargeInfoDto.setDate("Date: "+ rs.getString("bbps_info_details_dateadded"));
+                    viewRechargeInfoDto.setDate("Date: "+ rs.getString("recharge_info_details_date_added"));
                     viewRechargeDtoArrayList.add(viewRechargeInfoDto);
                 }
                 runOnUiThread(() -> {

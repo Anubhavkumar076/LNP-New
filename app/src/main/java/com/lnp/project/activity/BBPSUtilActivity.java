@@ -15,7 +15,9 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.lnp.project.LoginActivity;
@@ -78,19 +80,26 @@ public class BBPSUtilActivity extends AppCompatActivity {
                     return;
                 }
 
-                String url = "https://paysprint.in/service-api/api/v1/service/bill-payment/bill/getoperator";
+                String url = "http://www.techfolkapi.in/Paysprint/OperatorList";
+                JSONObject params = new JSONObject();
+                // on below line we are passing our key
+                // and value pair to our parameters.
+                try {
+                    params.put("userId", "TECHFOLK");
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
 
                 // creating a new variable for our request queue
                 RequestQueue queue = Volley.newRequestQueue(BBPSUtilActivity.this);
                 List<BBPSItemResponseDto> bbpsItemResponseDtoList = new ArrayList<>();
-
-                StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONObject response) {
 
                         // on below line we are displaying a success toast message.
                         try {
-                            JSONObject respObj = new JSONObject(response);
+                            JSONObject respObj = response.getJSONObject("responseData");
                             JSONArray respArray = respObj.getJSONArray("data");
                             if (respArray != null) {
                                 for (int i=0;i<respArray.length();i++){
@@ -121,11 +130,8 @@ public class BBPSUtilActivity extends AppCompatActivity {
                 }) {
                     @Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
-                        JWTKey jwtKey = new JWTKey();
-                        String jwtKeyString = jwtKey.getToken();
                         Map<String, String>  params = new HashMap<String, String>();
-                        params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                        params.put("Token", jwtKeyString);
+                        params.put("partnerKey", "TechFolk@2023@#8376852504");
 
                         return params;
                     }

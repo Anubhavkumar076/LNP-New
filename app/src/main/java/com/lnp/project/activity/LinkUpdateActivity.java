@@ -48,7 +48,7 @@ public class LinkUpdateActivity extends AppCompatActivity {
                 = new ProgressDialog(this);
 
         //create a list of items for the spinner.
-        String[] items = new String[]{"Select Banner","Youtube", "Instagram", "LNP eKart"};
+        String[] items = new String[]{"Select Banner","Youtube", "Instagram", "LNP eKart", "phone", "email", "whatsapp"};
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -77,6 +77,12 @@ public class LinkUpdateActivity extends AppCompatActivity {
                     updateKey = "Instagram";
                 } else if (banner.equals("LNP eKart")) {
                     updateKey = "lnpekart";
+                } else if (banner.equals("phone")) {
+                    updateKey = "phone";
+                } else if (banner.equals("email")) {
+                    updateKey = "email";
+                } else if (banner.equals("whatsapp")) {
+                    updateKey = "whatsapp";
                 }
                 updateValue = linkEditText.getText().toString().trim();
                 if(TextUtils.isEmpty(updateValue) || TextUtils.isEmpty(updateKey)) {

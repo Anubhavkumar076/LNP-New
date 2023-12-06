@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.WebsiteActivity"
+    android:background="@mipmap/background_trial"
+    android:padding="10dp">
+
+    <Spinner
+        android:id="@+id/website_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="7dp"
+        android:padding="5dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/input"
+        android:layout_below="@id/website_spinner"
+        android:id="@+id/website_url"
+        android:hint="Enter Link"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/input"
+        android:layout_below="@id/website_url"
+        android:id="@+id/website_banner"
+        android:hint="Enter Banner Name"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="7dp"
+        android:padding="5dp"
+        android:background="@drawable/button"
+        android:layout_below="@id/website_banner"
+        android:text="Add Link"
+        android:textColor="@color/white"
+        android:id="@+id/website_button"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/website_button"
+        android:background="@mipmap/background_trial">
+
+        <Spinner
+            android:id="@+id/website_fetch_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input"
+            android:spinnerMode="dropdown"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="7dp"
+            android:padding="5dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/website_recycler"
+            android:layout_marginRight="5dp"
+            android:padding="5dp"
+            android:layout_below="@id/website_fetch_spinner"/>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

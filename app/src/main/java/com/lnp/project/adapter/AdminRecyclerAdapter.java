@@ -15,10 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lnp.project.R;
 import com.lnp.project.activity.AdminDistrictActivity;
 import com.lnp.project.activity.AdminRetailerVerification;
+import com.lnp.project.activity.AllFundRequest;
 import com.lnp.project.activity.BannerUpdateActivity;
+import com.lnp.project.activity.FundRequestApproval;
 import com.lnp.project.activity.LinkUpdateActivity;
 import com.lnp.project.activity.QueryActivity;
+import com.lnp.project.activity.RetailerConfigActivity;
 import com.lnp.project.activity.UserSearchActivity;
+import com.lnp.project.activity.WebsiteActivity;
 import com.lnp.project.dto.MyListData;
 
 import java.util.List;
@@ -66,6 +70,18 @@ public class AdminRecyclerAdapter extends RecyclerView.Adapter<AdminRecyclerAdap
                     context.startActivity(intent[0]);
                 } else if (position == 5) {
                     intent[0] =  new Intent(context, UserSearchActivity.class);
+                    context.startActivity(intent[0]);
+                } else if (position == 6) {
+                    intent[0] =  new Intent(context, FundRequestApproval.class);
+                    context.startActivity(intent[0]);
+                } else if (position == 7) {
+                    intent[0] =  new Intent(context, AllFundRequest.class);
+                    context.startActivity(intent[0]);
+                } else if (position == 8) {
+                    intent[0] =  new Intent(context, RetailerConfigActivity.class);
+                    context.startActivity(intent[0]);
+                } else if (position == 9) {
+                    intent[0] =  new Intent(context, WebsiteActivity.class);
                     context.startActivity(intent[0]);
                 }
             }

@@ -20,6 +20,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,7 +54,7 @@ public class FundRequestActivity extends AppCompatActivity {
         requestFund.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setTitle("Adding Fund");
+                progressBar.setTitle("Raising Fund Request");
                 progressBar.setMessage("Wait For A While");
                 progressBar.show();
                 progressBar.setCanceledOnTouchOutside(false);
@@ -68,9 +70,12 @@ public class FundRequestActivity extends AppCompatActivity {
         @Override
         protected Map<String, String> doInBackground(Void... voids) {
             Map<String, String> info = new HashMap<>();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
 
             try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                String sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund + "+ fundRequest +" where idlnp_user_id = "+ userIdInt;
+                String sql = "INSERT INTO lnp.fund_request VALUES ("+null+", '"+fundRequest +"', "+
+                        userIdInt +", 0, '"+ dtf.format(now) +"')";
                 Statement statement = connection.createStatement();
                 statement.executeUpdate(sql);
                 runOnUiThread(() -> {

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CommisionUserSearch"
+    android:background="@mipmap/background_trial"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="5"
+        android:orientation="horizontal"
+        android:id="@+id/commision_user_search_linear"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/input">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:id="@+id/commision_user_search_search"
+            android:hint="Search by Name"
+            android:textColor="@color/black"
+            android:background="@drawable/input"
+            android:padding="5dp"
+            android:maxLines="1"
+            android:layout_weight="4"
+            />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:background="@drawable/input"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/baseline_search_24"
+                android:id="@+id/commision_user_search_button"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/commision_user_search_recycler"
+        android:scrollbars="vertical"
+        android:layout_below="@id/commision_user_search_linear"
+        android:layout_margin="10dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

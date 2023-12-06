@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LedgerFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_ledger_relative"
+        android:background="@drawable/input"
+        android:padding="10dp"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fragment_ledger_text"
+            android:text="View Ledgers"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textColor="#3F51B3"
+            />
+
+        <GridView
+            android:id="@+id/fragment_ledger_gridview"
+            android:layout_below="@id/fragment_ledger_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="50dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center_horizontal"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="4"
+            android:background="@drawable/input"
+            android:stretchMode="columnWidth"
+            >
+        </GridView>
+    </RelativeLayout>
+
+
+</RelativeLayout>

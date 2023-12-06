@@ -150,37 +150,45 @@ public class BBPSActivity extends AppCompatActivity {
 
             String operatorId = bbpsItemResponseDtoList.stream().filter(x -> x.getName().equals(operator)).map(BBPSItemResponseDto::getId).collect(Collectors.toList()).get(0);
 
-            String url = "https://paysprint.in/service-api/api/v1/service/bill-payment/bill/fetchbill";
+            String url = "http://www.techfolkapi.in/Paysprint/BillFetch";
+            JSONObject params = new JSONObject();
+            try {
+                params.put("userId", "TECHFOLK");
+                params.put("operatorId", operatorId);
+                params.put("caNumber", number);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
 
             // creating a new variable for our request queue
             RequestQueue queue = Volley.newRequestQueue(BBPSActivity.this);
 
-            StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params , new Response.Listener<JSONObject>() {
                 @Override
-                public void onResponse(String response) {
+                public void onResponse(JSONObject response) {
 
                     try {
+                        JSONObject respObj = response.getJSONObject("responseData");
 
-                        StringBuilder queryToCreate = new StringBuilder();
-                        Instant instant = Instant.now();
-                        long timeStampMillis = instant.toEpochMilli();
-                        ObjectMapper obj = new ObjectMapper();
-                        String json = obj.writeValueAsString(requestBodyParams);
-                        queryToCreate.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , '"+ json
-                                +"', '"+ response +"', '"+ userIdInt +"', "+ timeStampMillis +")");
+//                        StringBuilder queryToCreate = new StringBuilder();
+//                        Instant instant = Instant.now();
+//                        long timeStampMillis = instant.toEpochMilli();
+//                        ObjectMapper obj = new ObjectMapper();
+//                        String json = obj.writeValueAsString(requestBodyParams);
+//                        queryToCreate.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , '"+ json
+//                                +"', '"+ response +"', '"+ userIdInt +"', "+ timeStampMillis +")");
+//
+//                        new Thread(() -> {
+//                            try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+//                                Statement statement = connection.createStatement();
+//                                statement.executeUpdate(queryToCreate.toString());
+//
+//                            } catch (Exception e) {
+//                                Log.e("InfoAsyncTask", "Error reading school information", e);
+//                            }
+//
+//                        }).start();
 
-                        new Thread(() -> {
-                            try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                                Statement statement = connection.createStatement();
-                                statement.executeUpdate(queryToCreate.toString());
-
-                            } catch (Exception e) {
-                                Log.e("InfoAsyncTask", "Error reading school information", e);
-                            }
-
-                        }).start();
-
-                        JSONObject respObj = new JSONObject(response);
                         String name = respObj.getString("name");
                         String amount = respObj.getString("amount");
 
@@ -208,7 +216,7 @@ public class BBPSActivity extends AppCompatActivity {
                                     Toast.makeText(BBPSActivity.this, "You have insufficient balance. Please contact admin for recharge.", Toast.LENGTH_SHORT).show();
                             }
                         });
-                    } catch (JSONException | JsonProcessingException e) {
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
@@ -220,26 +228,9 @@ public class BBPSActivity extends AppCompatActivity {
 
             }) {
                 @Override
-                protected Map<String, String> getParams() {
-                    // below line we are creating a map for
-
-                    // on below line we are passing our key
-                    // and value pair to our parameters.
-                    requestBodyParams.put("operator", operatorId);
-                    requestBodyParams.put("canumber", number);
-                    requestBodyParams.put("mode", mode);
-
-                    // at last we are
-                    // returning our params.
-                    return requestBodyParams;
-                }
-                @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String>  params = new HashMap<String, String>();
-                    JWTKey jwtKey = new JWTKey();
-                    String jwtKeyString = jwtKey.getToken();
-                    params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                    params.put("Token", jwtKeyString);
+                    params.put("partnerKey", "TechFolk@2023@#8376852504");
 
                     return params;
                 }
@@ -254,10 +245,8 @@ public class BBPSActivity extends AppCompatActivity {
 
     private void payBill(String operatorId, String rupees, String mobileNumber, String mode,
                             JSONObject billFetch, Integer userIdInt) {
-        JWTKey jwtKey = new JWTKey();
-        String jwtKeyString = jwtKey.getToken();
         // url to post our data
-        String url = "https://paysprint.in/service-api/api/v1/service/bill-payment/bill/paybill";
+        String url = "http://www.techfolkapi.in/Paysprint/BillPayment";
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(BBPSActivity.this);
@@ -266,46 +255,44 @@ public class BBPSActivity extends AppCompatActivity {
         // on below line we are passing our key
         // and value pair to our parameters.
         try {
-            params.put("operator", operatorId);
-            params.put("canumber", Long.valueOf(mobileNumber));
+            params.put("userId", "TECHFOLK");
+            params.put("operatorId", operatorId);
+            params.put("caNumber", mobileNumber);
             params.put("amount", rupees);
-            params.put("referenceid", String.valueOf(random));
-            params.put("latitude", "27.2232");
-            params.put("longitude", "78.26535");
-            params.put("mode", mode);
-            params.put("bill_fetch", billFetch);
-
+            params.put("transactionId", String.valueOf(random));
+            params.put("billFetchData", billFetch);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONObject respObj) {
+            public void onResponse(JSONObject response) {
 //                response[0] = respObj;
                 try {
 
-                    StringBuilder queryToCreate = new StringBuilder();
-                    Instant instant = Instant.now();
-                    long timeStampMillis = instant.toEpochMilli();
-                    ObjectMapper obj = new ObjectMapper();
-                    obj.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-                    obj.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-                    String requestjson = obj.writeValueAsString(params);
-                    String responsejson = obj.writeValueAsString(respObj);
-                    queryToCreate.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , '"+ requestjson
-                            +"', '"+ responsejson +"', '"+ userIdInt +"', "+ timeStampMillis +")");
-
-                    new Thread(() -> {
-                        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                            Statement statement = connection.createStatement();
-                            statement.executeUpdate(queryToCreate.toString());
-
-                        } catch (Exception e) {
-                            Log.e("InfoAsyncTask", "Error reading school information", e);
-                        }
-
-                    }).start();
+                    JSONObject respObj = response.getJSONObject("responseData");
+//                    StringBuilder queryToCreate = new StringBuilder();
+//                    Instant instant = Instant.now();
+//                    long timeStampMillis = instant.toEpochMilli();
+//                    ObjectMapper obj = new ObjectMapper();
+//                    obj.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+//                    obj.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+//                    String requestjson = obj.writeValueAsString(params);
+//                    String responsejson = obj.writeValueAsString(respObj);
+//                    queryToCreate.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , '"+ requestjson
+//                            +"', '"+ responsejson +"', '"+ userIdInt +"', "+ timeStampMillis +")");
+//
+//                    new Thread(() -> {
+//                        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+//                            Statement statement = connection.createStatement();
+//                            statement.executeUpdate(queryToCreate.toString());
+//
+//                        } catch (Exception e) {
+//                            Log.e("InfoAsyncTask", "Error reading school information", e);
+//                        }
+//
+//                    }).start();
 
                     String message = respObj.getString("message");
                     saveBBPSData(operator, mobileNumber, rupees, random, mode, bbpsItemResponseDtoList.get(0).getCategory(), billFetch, userIdInt);
@@ -317,8 +304,6 @@ public class BBPSActivity extends AppCompatActivity {
 //                    saveRechargeData(String.valueOf(operatorId), mobileNumber, String.valueOf(rupees),
 //                            String.valueOf(random), ackNo, userIdInt);
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -332,8 +317,7 @@ public class BBPSActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                params.put("Token", jwtKeyString);
+                params.put("partnerKey", "TechFolk@2023@#8376852504");
 
                 return params;
             }
@@ -373,10 +357,8 @@ public class BBPSActivity extends AppCompatActivity {
 
     private void billPayment(Integer random, int bbpsInfoId) {
 
-        JWTKey jwtKey = new JWTKey();
-        String jwtKeyString = jwtKey.getToken();
         // url to post our data
-        String url = "https://paysprint.in/service-api/api/v1/service/bill-payment/bill/status";
+        String url = "http://www.techfolkapi.in/Paysprint/BBPSStatusEnquiry";
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(BBPSActivity.this);
@@ -384,6 +366,7 @@ public class BBPSActivity extends AppCompatActivity {
         // on below line we are passing our key
         // and value pair to our parameters.
         try {
+            params.put("userId", "TECHFOLK");
             params.put("referenceid", String.valueOf(random));
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -391,31 +374,10 @@ public class BBPSActivity extends AppCompatActivity {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONObject respObj) {
+            public void onResponse(JSONObject response) {
                 try {
 
-                    StringBuilder query = new StringBuilder();
-                    Instant instant = Instant.now();
-                    long timeStampMillis = instant.toEpochMilli();
-                    ObjectMapper obj = new ObjectMapper();
-                    obj.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-                    obj.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-                    String requestjson = obj.writeValueAsString(params);
-                    String responsejson = obj.writeValueAsString(respObj);
-                    query.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , '"+ requestjson
-                            +"', '"+ responsejson +"', '"+ userIdInt +"', "+ timeStampMillis +")");
-
-                    new Thread(() -> {
-                        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                            Statement statement = connection.createStatement();
-                            statement.executeUpdate(query.toString());
-
-                        } catch (Exception e) {
-                            Log.e("InfoAsyncTask", "Error reading school information", e);
-                        }
-
-                    }).start();
-
+                    JSONObject respObj = response.getJSONObject("responseData");
                     JSONObject jsonObject = respObj.getJSONObject("data");
                     String txnId = jsonObject.getString("txnid");
                     String operatorname = jsonObject.getString("operatorname");
@@ -432,11 +394,21 @@ public class BBPSActivity extends AppCompatActivity {
                             + refundtxnid +"')");
                     new Thread(() -> {
                         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+
+                            String sql = "Select * from lnp.lnp_user where idlnp_user_id = '"+userIdInt;
                             Statement statement = connection.createStatement();
+                            ResultSet rs = statement.executeQuery(sql);
+                            Double bbpsCom = null;
+                            while (rs.next()) {
+                                bbpsCom = rs.getDouble("lnp_user_bbps_comm");
+
+                            }
+                            statement = connection.createStatement();
                             statement.executeUpdate(queryToCreate.toString());
 
-                            Double finalAmount = Double.parseDouble(amount) - Double.parseDouble(comm);
-                            String sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund - "+ finalAmount +" where idlnp_user_id = "+ userIdInt;
+                            Double commission = (Double) (Double.parseDouble(comm)/100 * bbpsCom);
+                            Double finalAmount = Double.parseDouble(amount) - commission;
+                            sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund - "+ finalAmount +" where idlnp_user_id = "+ userIdInt;
                             Statement amountUpdate = connection.createStatement();
                             amountUpdate.executeUpdate(sql);
 
@@ -453,8 +425,6 @@ public class BBPSActivity extends AppCompatActivity {
                     startActivity(i);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
                 }
             }
         }, new com.android.volley.Response.ErrorListener() {
@@ -467,8 +437,7 @@ public class BBPSActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                params.put("Token", jwtKeyString);
+                params.put("partnerKey", "TechFolk@2023@#8376852504");
 
                 return params;
             }

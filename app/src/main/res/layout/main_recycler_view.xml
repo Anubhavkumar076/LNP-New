@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grid_view_relative"
+        android:background="@drawable/input"
+        android:padding="10dp"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/assistance_query_text"
+            android:text="Assistance Query"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textColor="#3F51B3"
+            />
+
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_below="@id/assistance_query_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="50dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center_horizontal"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="4"
+            android:background="@drawable/input"
+            android:stretchMode="columnWidth"
+            >
+        </GridView>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@id/grid_view_relative"
+        android:id="@+id/main_retailer_text"
+        android:background="@color/black"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textAlignment="center"
+        android:padding="3dp"
+        android:layout_margin="5dp"
+        android:textStyle="bold"
+        android:text="PLEASE CLICK HERE TO BECOME RETAILER!"
+        android:textColor="#CA0404"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/utility_grid_view_relative"
+        android:layout_below="@id/main_retailer_text"
+        android:background="@drawable/input"
+        android:padding="10dp"
+        android:layout_margin="5dp">
+
+        <GridView
+            android:id="@+id/utility_main_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="50dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center_horizontal"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="4"
+            android:background="@drawable/input"
+            android:stretchMode="columnWidth"
+            >
+        </GridView>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="6"
+        android:background="@drawable/input"
+        android:layout_below="@id/utility_grid_view_relative"
+        android:id="@+id/main_support_linear"
+        android:padding="10dp"
+        android:layout_margin="5dp">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:padding="2dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="2"
+            android:text="Customer Support"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:gravity="center"
+            />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/baseline_local_phone_24"
+            android:id="@+id/main_phone"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/baseline_mail_outline_24"
+            android:id="@+id/main_email"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/baseline_perm_phone_msg_24"
+            android:id="@+id/main_whatsapp"/>
+
+
+
+    </LinearLayout>
+
+    <!--        </RelativeLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/utility_websites_grid_view_relative"
+        android:layout_below="@id/main_support_linear"
+        android:background="@drawable/input"
+        android:padding="10dp"
+        android:layout_margin="5dp">
+
+        <GridView
+            android:id="@+id/utility_websites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="50dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center_horizontal"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="4"
+            android:background="@drawable/input"
+            android:stretchMode="columnWidth"
+            >
+        </GridView>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

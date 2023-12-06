@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:title="Home"
+        android:icon="@drawable/baseline_perm_phone_msg_24"/>
+    <item
+        android:id="@+id/action_wallet"
+        android:title="Wallet"
+        android:icon="@drawable/baseline_perm_phone_msg_24"/>
+    <item
+        android:id="@+id/action_ledger"
+        android:title="Ledger"
+        android:icon="@drawable/baseline_perm_phone_msg_24"/>
+    <item
+        android:id="@+id/action_profile"
+        android:title="Profile"
+        android:icon="@drawable/baseline_perm_phone_msg_24"/>
+    <item
+        android:id="@+id/action_contact_us"
+        android:title="Contact Us"
+        android:icon="@drawable/baseline_perm_phone_msg_24"/>
+</menu>

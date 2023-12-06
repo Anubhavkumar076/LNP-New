@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -19,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,18 +31,27 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.util.CollectionUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lnp.project.ContactUsFragment;
+import com.lnp.project.HomeFragment;
+import com.lnp.project.LedgerFragment;
 import com.lnp.project.LoginActivity;
+import com.lnp.project.ProfileFragment;
 import com.lnp.project.R;
 import com.lnp.project.adapter.ImageAdapter;
+import com.lnp.project.adapter.MainAdapter;
+import com.lnp.project.adapter.ViewBBPSAdapter;
 import com.lnp.project.adapter.ViewRechargeAdapter;
 import com.lnp.project.common.JWTKey;
+import com.lnp.project.dto.MainAdapterDto;
 import com.lnp.project.dto.MyListData;
 import com.lnp.project.dto.ViewRechargeInfoDto;
 import com.squareup.picasso.Picasso;
@@ -52,7 +64,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -63,33 +77,14 @@ public class MainActivity extends AppCompatActivity {
     private static final String USER = "admin";
     private static final String PASSWORD = "adminlnp";
 
-    String iconName[]= {"Loans", "CA", "Engineer", "Cibil", "Savings", "View Forms"};
-
-    int mThumbIds[]={
-            R.drawable.loans, R.drawable.caservice, R.drawable.engineerservice,
-            R.drawable.cibilscore, R.drawable.supersaving, R.drawable.viewform
-
-    };
-    String utilityName[]= {"Recharge", "PAN Card", "BBPS", "Fund Request"};
-
-    int utilityImage[]={
-            R.mipmap.recharge, R.mipmap.pan, R.mipmap.bill, R.mipmap.fund
-
-    };
-    String iconNameAdmin[]= {"Loans", "CA", "Engineer", "Cibil", "Savings", "View Forms", "Admin"};
-
-    int mThumbIdsAdmin[]={
-            R.drawable.loans, R.drawable.caservice, R.drawable.engineerservice,
-            R.drawable.cibilscore, R.drawable.supersaving, R.drawable.viewform, R.drawable.adminicon
-
-    };
-
-    String creditWallet, debitWallet;
-
-    TextView creditWalletText, debitWalletText, retailerVerifyText;
-
-    CardView cardView;
-
+//    String creditWallet, debitWallet;
+//
+//    TextView creditWalletText, debitWalletText;
+////    retailerVerifyText;
+//
+//    CardView cardView;
+//
+//    RecyclerView mRecycler;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -110,13 +105,7 @@ public class MainActivity extends AppCompatActivity {
         // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
         builder.setCancelable(false);
 
-        if (item.getTitle().equals("My Profile")) {
-            Intent i = new Intent(getApplicationContext(), UserProfile.class);
-            startActivity(i);
-        } else if (item.getTitle().equals("Contact Us")) {
-            Intent i = new Intent(getApplicationContext(), ContactUsActivity.class);
-            startActivity(i);
-        } else if (item.getTitle().equals("Youtube")) {
+        if (item.getTitle().equals("Youtube")) {
             new Thread(() -> {
                 try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
                     String sql = "SELECT * FROM lnp.lnp_admin_key_value where lnp_admin_key_value_key like '%youtube%'";
@@ -239,52 +228,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     Boolean isAdmin, isRetailer;
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        GridView gridview = (GridView) findViewById(R.id.gridView);
-        GridView utilityGridview = (GridView) findViewById(R.id.utility_main_grid);
         sp = getSharedPreferences("login",MODE_PRIVATE);
-        creditWalletText = findViewById(R.id.credit_balance_text);
-        debitWalletText = findViewById(R.id.debit_card_balance);
-        retailerVerifyText = findViewById(R.id.main_retailer_text);
-        cardView = findViewById(R.id.main_card_view);
-//        ImageView imageView = (ImageView) findViewById(R.id.recharge_icon);
-        getCreditBalance();
-        getDebitBalance();
+//        creditWalletText = findViewById(R.id.credit_balance_text);
+//        debitWalletText = findViewById(R.id.debit_card_balance);
+//        cardView = findViewById(R.id.main_card_view);
+//        mRecycler = findViewById(R.id.main_recycler_list);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+//        getCreditBalance();
+//        getDebitBalance();
         setTitle("LNP Mini Bank");
+//        MainAdapterDto mainAdapterDto = new MainAdapterDto();
         isAdmin = sp.getBoolean("admin", false);
-        isRetailer = sp.getBoolean("retailer", true);
+        isRetailer = sp.getBoolean("retailer", false);
         Integer userIdInt = Integer.parseInt(sp.getString("userId", ""));
-        if (isAdmin) {
-            ImageAdapter adapter = new ImageAdapter(MainActivity.this, mThumbIdsAdmin, iconNameAdmin);
-            gridview.setAdapter(adapter);
+//        List<MainAdapterDto> mainAdapterDtoList = new ArrayList<>();
+//        if (isAdmin)
+//            mainAdapterDto.setAdmin(true);
+//        else if (isRetailer) {
+//            mainAdapterDto.setRetailer(true);
+//        } else {
+//            mainAdapterDto.setUser(true);
+//        }
 
-        } else {
-            ImageAdapter adapter = new ImageAdapter(MainActivity.this, mThumbIds, iconName);
-            gridview.setAdapter(adapter);
-        }
+//        if (!isRetailer && !isAdmin) {
+//            cardView.setVisibility(View.GONE);
+//        }
 
-        if (!isRetailer && !isAdmin) {
-            cardView.setVisibility(View.GONE);
-            retailerVerifyText.setVisibility(View.VISIBLE);
-        }
-
-        if (isRetailer || isAdmin) {
-            retailerVerifyText.setVisibility(View.GONE);
-        }
-
-        retailerVerifyText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, RetailerVerificationActivity.class);
-                startActivity(i);
-            }
-        });
-
-        ImageAdapter utilityAdapter = new ImageAdapter(MainActivity.this, utilityImage, utilityName);
-        utilityGridview.setAdapter(utilityAdapter);
 
         new Thread(() -> {
             try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
@@ -306,7 +281,6 @@ public class MainActivity extends AppCompatActivity {
                     Uri uri = Uri.parse(finalHomeScreenBanner);
 
                     Picasso.get().load(uri.toString()).into(image);
-                    Boolean walletText = false;
 
                      if(isRetailer) {
                         new Thread(() -> {
@@ -320,29 +294,33 @@ public class MainActivity extends AppCompatActivity {
                                     retailerCreditWallet = resultSet.getString("lnp_user_credit_fund");
                                     retailerDebitWallet = resultSet.getString("lnp_user_debit_fund");
                                 }
-                                String finalRetailerCreditWallet = retailerCreditWallet;
-                                String finalRetailerDebitWallet = retailerDebitWallet;
-                                runOnUiThread(() -> {
-                                    try {
-                                            creditWalletText.setText("Credit Wallet: \n"+ finalRetailerCreditWallet);
-                                            debitWalletText.setText("Debit Wallet: \n"+ finalRetailerDebitWallet);
 
-                                    } catch (Exception ex) {
-                                        Log.e("InfoAsyncTask", "Error reading school information", ex);
-                                    }
-
-                                });
+                                Bundle bundle = new Bundle();
+                                bundle.putString("retailerCreditWallet", retailerCreditWallet);
+                                bundle.putString("retailerDebitWallet", retailerDebitWallet);
+                                HomeFragment homeFragment = new HomeFragment();
+                                homeFragment.setArguments(bundle);
+//                                runOnUiThread(() -> {
+//                                    try {
+//                                            creditWalletText.setText("Credit Wallet: \n"+ finalRetailerCreditWallet);
+//                                            debitWalletText.setText("Debit Wallet: \n"+ finalRetailerDebitWallet);
+//
+//                                    } catch (Exception ex) {
+//                                        Log.e("InfoAsyncTask", "Error reading school information", ex);
+//                                    }
+//
+//                                });
                             } catch (Exception e) {
                                 Log.e("InfoAsyncTask", "Error reading school information", e);
                             }
 
                         }).start();
                     } else {
-                        if(creditWallet != null && debitWallet != null) {
-                            walletText = true;
-                            creditWalletText.setText("Credit Wallet: \n"+creditWallet);
-                            debitWalletText.setText("Debit Wallet: \n"+debitWallet);
-                        }
+//                        if(creditWallet != null && debitWallet != null) {
+//                            walletText = true;
+//                            creditWalletText.setText("Credit Wallet: \n"+creditWallet);
+//                            debitWalletText.setText("Debit Wallet: \n"+debitWallet);
+//                        }
                     }
 
                     try {
@@ -351,11 +329,15 @@ public class MainActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
 
-                    while(walletText) {
-                        creditWalletText.setText("Credit Wallet: \n"+creditWallet);
-                        debitWalletText.setText("Debit Wallet: \n"+debitWallet);
-                        break;
-                    }
+//                    while(walletText) {
+////                        creditWalletText.setText("Credit Wallet: \n"+creditWallet);
+////                        debitWalletText.setText("Debit Wallet: \n"+debitWallet);
+//                        if (!mainAdapterDtoList.isEmpty()
+//                                && mainAdapterDtoList.get(0).getDebitWallet() == null  && debitWallet != null) {
+//                            mainAdapterDtoList.get(0).setDebitWallet(debitWallet);
+//                        }
+//                        break;
+//                    }
 
                     builder.setView(imageLayoutView)
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -367,20 +349,6 @@ public class MainActivity extends AppCompatActivity {
                     builder.create();
                     builder.show();
 
-                    if (isAdmin) {
-                        new Thread(() -> {
-                            try (Connection updateCon = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                                String updatesql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = "+ debitWallet +" where idlnp_user_id = "+ userIdInt;
-                                Statement amountUpdate = updateCon.createStatement();
-                                amountUpdate.executeUpdate(updatesql);
-
-                            } catch (Exception e) {
-                                Log.e("InfoAsyncTask", "Error reading school information", e);
-                            }
-
-                        }).start();
-                    }
-
                 });
             } catch (Exception e) {
                 Log.e("InfoAsyncTask", "Error reading school information", e);
@@ -388,69 +356,36 @@ public class MainActivity extends AppCompatActivity {
 
         }).start();
 
-        utilityGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if(isAdmin || isRetailer) {
-                    if (position == 0) {
-                        Intent i = new Intent(getApplicationContext(), MobileRechargeUtilActivity.class);
-                        startActivity(i);
-                    } else if (position == 1) {
-                        Intent i = new Intent(getApplicationContext(), PanCardUtilActivity.class);
-                        startActivity(i);
-                    } else if (position == 2) {
-                        Intent i = new Intent(getApplicationContext(), BBPSUtilActivity.class);
-                        startActivity(i);
-                    } else if (position == 3) {
-                        Intent i = new Intent(getApplicationContext(), FundRequestActivity.class);
-                        i.putExtra("debitWallet", debitWallet);
-                        startActivity(i);
-                    }
-                } else {
-                    Toast.makeText(MainActivity.this, "You are not a retailer. Please click on verification banner above to become retailer!", Toast.LENGTH_SHORT).show();
-                }
 
-            }
-        });
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
-
-
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent,
-                                    View v, int position, long id){
-
-                if (position == 6) {
-                    // Send intent to SingleViewActivity
-                    Intent i = new Intent(getApplicationContext(), AdminPanelActivity.class);
-                    startActivity(i);
-                } else if (position == 0) {
-                    Intent i = new Intent(getApplicationContext(), SingleViewActivity.class);
-                    i.putExtra("service","Other Services");
-                    startActivity(i);
-                } else if (position == 1) {
-                    Intent i = new Intent(getApplicationContext(), SingleViewActivity.class);
-                    i.putExtra("service","CA Services");
-                    startActivity(i);
-                } else if (position == 2) {
-                    Intent i = new Intent(getApplicationContext(), SingleViewActivity.class);
-                    i.putExtra("service","Engineer Services");
-                    startActivity(i);
-                } else if (position == 3) {
-                    Intent i = new Intent(getApplicationContext(), SingleViewActivity.class);
-                    i.putExtra("service","CIBIL Score");
-                    startActivity(i);
-                } else if (position == 4) {
-                    Intent i = new Intent(getApplicationContext(), SingleViewActivity.class);
-                    i.putExtra("service","Super Savings");
-                    startActivity(i);
-                } else if (position == 5) {
-                    Intent i = new Intent(getApplicationContext(), ViewContactFormActivity.class);
-                    startActivity(i);
-                }
-
-            }
-        });
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new HomeFragment()).commit();
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
+
+                    if (item.getTitle().equals("Home")) {
+                        selectedFragment = new HomeFragment();
+                    } else if (item.getTitle().equals("Profile")) {
+                        selectedFragment = new ProfileFragment();
+                    } else if (item.getTitle().equals("Contact Us")) {
+                        selectedFragment = new ContactUsFragment();
+                    } else if (item.getTitle().equals("Ledger")) {
+                        selectedFragment = new LedgerFragment();
+                    } else if (item.getTitle().equals("Wallet")) {
+                        selectedFragment = new ContactUsFragment();
+                    }
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            selectedFragment).commit();
+                    return true;
+                }
+            };
 
     private void deleteuser(Integer userId) {
 
@@ -495,86 +430,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-    }
-
-    public void getDebitBalance() {
-
-        JWTKey jwtKey = new JWTKey();
-        String token = jwtKey.getToken();
-        String url = "https://paysprint.in/service-api/api/v1/service/balance/balance/cashbalance";
-
-        // creating a new variable for our request queue
-        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                JSONObject jsonObject = null;
-                try {
-                    jsonObject = new JSONObject(response);
-                    debitWallet = jsonObject.getString("cdwallet");
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                params.put("Token", token);
-                return params;
-            }
-        };
-        // below line is to make
-        // a json object request.
-        queue.add(request);
-    }
-
-    public void getCreditBalance() {
-
-        JWTKey jwtKey = new JWTKey();
-        String token = jwtKey.getToken();
-        String url = "https://paysprint.in/service-api/api/v1/service/balance/balance/mainbalance";
-
-        // creating a new variable for our request queue
-        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                JSONObject jsonObject = null;
-                try {
-                    jsonObject = new JSONObject(response);
-                    creditWallet = jsonObject.getString("wallet");
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                params.put("Token", token);
-                return params;
-            }
-        };
-        // below line is to make
-        // a json object request.
-        queue.add(request);
     }
 
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/input"
+    android:layout_margin="4dp"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="5"
+        android:orientation="horizontal"
+        android:id="@+id/user_search_linear"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/input">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4">
+
+            <TextView
+                android:id="@+id/website_show_list_names"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="5sp"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                android:id="@+id/website_show_list_urls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_below="@id/website_show_list_names"
+                android:textSize="16sp"
+                android:padding="5sp">
+            </TextView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/input"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="15dp"
+                android:layout_centerInParent="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/baseline_delete_forever_24"
+                android:id="@+id/website_show_delete"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

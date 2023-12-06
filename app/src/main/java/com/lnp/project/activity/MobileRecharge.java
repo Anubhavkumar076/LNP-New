@@ -294,36 +294,43 @@ public class MobileRecharge extends AppCompatActivity {
 
     private void getOperatorList(String token) {
         // url to post our data
-        String url = "https://paysprint.in/service-api/api/v1/service/recharge/recharge/getoperator";
+        String url = "http://www.techfolkapi.in/Paysprint/RechargeOperatorList";
+        JSONObject params = new JSONObject();
+        try {
+            params.put("userId", "TECHFOLK");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(MobileRecharge.this);
 
-        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+        OperatorListDto operatorListDtoLocal = new OperatorListDto();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params , new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(JSONObject response) {
 
                 try {
                     // on below line we are parsing the response
                     // to json object to extract data from it.
-                    JSONObject respObj = new JSONObject(response);
-                    StringBuilder queryToCreate = new StringBuilder();
-                    Instant instant = Instant.now();
-                    long timeStampMillis = instant.toEpochMilli();
-                    queryToCreate.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , "+ null
-                            +", '"+ response +"', '"+ userIdInt +"', "+ timeStampMillis +")");
-
-                    new Thread(() -> {
-                        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                            Statement statement = connection.createStatement();
-                            statement.executeUpdate(queryToCreate.toString());
-
-                        } catch (Exception e) {
-                            Log.e("InfoAsyncTask", "Error reading school information", e);
-                        }
-
-                    }).start();
-                    operatorListDto.setStatus(respObj.getBoolean("status"));
+                    JSONObject respObj = response.getJSONObject("responseData");
+//                    StringBuilder queryToCreate = new StringBuilder();
+//                    Instant instant = Instant.now();
+//                    long timeStampMillis = instant.toEpochMilli();
+//                    queryToCreate.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , "+ null
+//                            +", '"+ response +"', '"+ userIdInt +"', "+ timeStampMillis +")");
+//
+//                    new Thread(() -> {
+//                        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+//                            Statement statement = connection.createStatement();
+//                            statement.executeUpdate(queryToCreate.toString());
+//
+//                        } catch (Exception e) {
+//                            Log.e("InfoAsyncTask", "Error reading school information", e);
+//                        }
+//
+//                    }).start();
+                    operatorListDtoLocal.setStatus(respObj.getBoolean("status"));
 
                     List<OperatorListDataDto> operatorListDataDtos = new ArrayList<>();
 
@@ -338,7 +345,8 @@ public class MobileRecharge extends AppCompatActivity {
                             operatorListDataDtos.add(operatorListDataDto);
                         }
                     }
-                    operatorListDto.setOperatorListDataDtos(operatorListDataDtos);
+                    operatorListDtoLocal.setOperatorListDataDtos(operatorListDataDtos);
+                    operatorListDto = operatorListDtoLocal;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -353,8 +361,7 @@ public class MobileRecharge extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                params.put("Token", token);
+                params.put("partnerKey", "TechFolk@2023@#8376852504");
 
                 return params;
             }
@@ -366,38 +373,44 @@ public class MobileRecharge extends AppCompatActivity {
 
     private void hlrCheck(String number, String token) {
         // url to post our data
-        String url = "https://paysprint.in/service-api/api/v1/service/recharge/hlrapi/hlrcheck";
+        String url = "http://www.techfolkapi.in/Paysprint/HLRCheck";
+        JSONObject params = new JSONObject();
+        try {
+            params.put("userId", "TECHFOLK");
+            params.put("number", number);
+            params.put("type", "mobile");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(MobileRecharge.this);
 
-        Map<String, String> requestBodyParams = new HashMap<String, String>();
-
-        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params , new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(JSONObject response) {
 
                 try {
-                    JSONObject respObj = new JSONObject(response);
+                    JSONObject respObj = response.getJSONObject("responseData");
 
-                    StringBuilder queryToCreate = new StringBuilder();
-                    Instant instant = Instant.now();
-                    long timeStampMillis = instant.toEpochMilli();
-                    ObjectMapper obj = new ObjectMapper();
-                    String json = obj.writeValueAsString(requestBodyParams);
-                    queryToCreate.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , '"+ json
-                            +"', '"+ response +"', '"+ userIdInt +"', "+ timeStampMillis +")");
+//                    StringBuilder queryToCreate = new StringBuilder();
+//                    Instant instant = Instant.now();
+//                    long timeStampMillis = instant.toEpochMilli();
+//                    ObjectMapper obj = new ObjectMapper();
+//                    String json = obj.writeValueAsString(requestBodyParams);
+//                    queryToCreate.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , '"+ json
+//                            +"', '"+ response +"', '"+ userIdInt +"', "+ timeStampMillis +")");
 
-                    new Thread(() -> {
-                        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                            Statement statement = connection.createStatement();
-                            statement.executeUpdate(queryToCreate.toString());
-
-                        } catch (Exception e) {
-                            Log.e("InfoAsyncTask", "Error reading school information", e);
-                        }
-
-                    }).start();
+//                    new Thread(() -> {
+//                        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+//                            Statement statement = connection.createStatement();
+//                            statement.executeUpdate(queryToCreate.toString());
+//
+//                        } catch (Exception e) {
+//                            Log.e("InfoAsyncTask", "Error reading school information", e);
+//                        }
+//
+//                    }).start();
 
                     HlrCheckDto hlrCheckDto = new HlrCheckDto();
                     hlrCheckDto.setMessage(respObj.getString("message"));
@@ -430,8 +443,6 @@ public class MobileRecharge extends AppCompatActivity {
                     progressBar.hide();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
                 }
             }
         }, new com.android.volley.Response.ErrorListener() {
@@ -442,24 +453,9 @@ public class MobileRecharge extends AppCompatActivity {
 
         }) {
             @Override
-            protected Map<String, String> getParams() {
-                // below line we are creating a map for
-                // storing our values in key and value pair.
-
-                // on below line we are passing our key
-                // and value pair to our parameters.
-                requestBodyParams.put("number", number);
-                requestBodyParams.put("type", "mobile");
-
-                // at last we are
-                // returning our params.
-                return requestBodyParams;
-            }
-            @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                params.put("Token", token);
+                params.put("partnerKey", "TechFolk@2023@#8376852504");
 
                 return params;
             }
@@ -471,37 +467,44 @@ public class MobileRecharge extends AppCompatActivity {
 
     private void browsePlan(String circle, String operatorId) {
         // url to post our data
-        String url = "https://paysprint.in/service-api/api/v1/service/recharge/hlrapi/browseplan";
+        String url = "http://www.techfolkapi.in/Paysprint/BrowsePlan";
+        JSONObject params = new JSONObject();
+        try {
+            params.put("userId", "TECHFOLK");
+            params.put("operatorId", operatorId);
+            params.put("circle", circle);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
 
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(MobileRecharge.this);
-        Map<String, String> requestBodyParams = new HashMap<String, String>();
 
-        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params , new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(JSONObject response) {
 
                 // on below line we are displaying a success toast message.
                 try {
-                    JSONObject respObj = new JSONObject(response);
-                    StringBuilder queryToCreate = new StringBuilder();
-                    Instant instant = Instant.now();
-                    long timeStampMillis = instant.toEpochMilli();
-                    ObjectMapper obj = new ObjectMapper();
-                    String json = obj.writeValueAsString(requestBodyParams);
-                    queryToCreate.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , '"+ json
-                            +"', '"+ response +"', '"+ userIdInt +"', "+ timeStampMillis +")");
-
-                    new Thread(() -> {
-                        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                            Statement statement = connection.createStatement();
-                            statement.executeUpdate(queryToCreate.toString());
-
-                        } catch (Exception e) {
-                            Log.e("InfoAsyncTask", "Error reading school information", e);
-                        }
-
-                    }).start();
+                    JSONObject respObj = response.getJSONObject("responseData");
+//                    StringBuilder queryToCreate = new StringBuilder();
+//                    Instant instant = Instant.now();
+//                    long timeStampMillis = instant.toEpochMilli();
+//                    ObjectMapper obj = new ObjectMapper();
+//                    String json = obj.writeValueAsString(requestBodyParams);
+//                    queryToCreate.append("INSERT INTO lnp.transaction_log VALUES ("+null+", '"+ url +"' , '"+ json
+//                            +"', '"+ response +"', '"+ userIdInt +"', "+ timeStampMillis +")");
+//
+//                    new Thread(() -> {
+//                        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+//                            Statement statement = connection.createStatement();
+//                            statement.executeUpdate(queryToCreate.toString());
+//
+//                        } catch (Exception e) {
+//                            Log.e("InfoAsyncTask", "Error reading school information", e);
+//                        }
+//
+//                    }).start();
                     browsePlan.setStatus(respObj.getBoolean("status"));
                     browsePlan.setMessage(respObj.getString("message"));
                     browsePlan.setResponseCode(respObj.getInt("response_code"));
@@ -556,8 +559,6 @@ public class MobileRecharge extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
                 }
             }
         }, new com.android.volley.Response.ErrorListener() {
@@ -568,19 +569,9 @@ public class MobileRecharge extends AppCompatActivity {
 
         }) {
             @Override
-            protected Map<String, String> getParams() {
-                requestBodyParams.put("op", operatorId);
-                requestBodyParams.put("circle", circle);
-
-                return requestBodyParams;
-            }
-            @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                JWTKey jwtKey = new JWTKey();
-                String jwtKeyString = jwtKey.getToken();
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("Authorisedkey", "NjAxMjlhZGQ5MjMwODNiZTMwYzFjNGQwYWRlM2QwNmU=");
-                params.put("Token", jwtKeyString);
+                params.put("partnerKey", "TechFolk@2023@#8376852504");
 
                 return params;
             }
