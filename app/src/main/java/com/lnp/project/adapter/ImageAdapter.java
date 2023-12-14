@@ -49,7 +49,7 @@ public class ImageAdapter extends BaseAdapter {
         if (convertview==null)
         {
             inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            gridview=inflater.inflate(R.layout.main_grid_layout,null);
+            gridview=inflater.inflate(R.layout.main_grid_layout,parent, false);
         }
 
         ImageView icon=gridview.findViewById(R.id.icon);

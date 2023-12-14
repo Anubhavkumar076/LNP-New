@@ -79,7 +79,7 @@ public class FundRequestActivity extends AppCompatActivity {
                 Statement statement = connection.createStatement();
                 statement.executeUpdate(sql);
                 runOnUiThread(() -> {
-                    Toast.makeText(FundRequestActivity.this, "Fund Added!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FundRequestActivity.this, "Fund Request Added!", Toast.LENGTH_SHORT).show();
                     progressBar.hide();
                     Intent i = new Intent(FundRequestActivity.this, MainActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);

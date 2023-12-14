@@ -45,6 +45,7 @@ public class ViewBBPSActivity extends AppCompatActivity {
         sp = getSharedPreferences("login",MODE_PRIVATE);
         Integer userIdInt = Integer.parseInt(sp.getString("userId", ""));
         Boolean isAdmin = sp.getBoolean("admin", false);
+        String category = getIntent().getStringExtra("category");
 
         List<ViewBBPSInfoDto> viewBBPSInfoDtos = new ArrayList<>();
 
@@ -53,10 +54,10 @@ public class ViewBBPSActivity extends AppCompatActivity {
                 String sql = "SELECT * FROM lnp.bbps_info as bi inner join lnp.bbps_info_details" +
                         " as bid on bi.idbbps_info_id = bid.bbps_info_details_info_id  inner join" +
                         " lnp.lnp_user_information" +
-                        " as lui on bi.bbps_info_userId = lui.lnp_user_information_user_id";
+                        " as lui on bi.bbps_info_userId = lui.lnp_user_information_user_id where bi.bbps_info_category = '"+category +"'";
 
                 if(userIdInt != null && !isAdmin) {
-                    sql += " where bi.bbps_info_userId = "+ userIdInt;
+                    sql += " and bi.bbps_info_userId = "+ userIdInt;
                 }
                 sql += " order by bi.idbbps_info_id desc";
 

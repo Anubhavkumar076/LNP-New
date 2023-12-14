@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.RetailerConfigActivity"
-    android:background="@mipmap/background_trial"
+    android:background="@color/screen_background"
     android:padding="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/background_trial"
+        android:background="@drawable/input"
         android:layout_margin="4dp"
         android:padding="4dp"
         android:id="@+id/retailer_config_relative">
@@ -97,7 +97,7 @@
                 android:textSize="16sp"
                 android:padding="5sp"
                 android:layout_weight="1"
-                android:text="Recharge"
+                android:text="Recharge (%)"
                 android:textStyle="bold"
                 android:id="@+id/retailer_config_recharge_label"/>
 
@@ -135,7 +135,7 @@
                 android:textSize="16sp"
                 android:padding="5sp"
                 android:layout_weight="1"
-                android:text="PAN"
+                android:text="PAN (Rs.)"
                 android:textStyle="bold"
                 android:id="@+id/retailer_config_pan_label"/>
 
@@ -173,7 +173,7 @@
                 android:textSize="16sp"
                 android:padding="5sp"
                 android:layout_weight="1"
-                android:text="BBPS"
+                android:text="BBPS (%)"
                 android:textStyle="bold"
                 android:id="@+id/retailer_config_bbps_label"/>
 
@@ -213,7 +213,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/background_trial"
+        android:background="@drawable/input"
         android:layout_margin="4dp"
         android:padding="4dp"
         android:layout_below="@id/retailer_config_relative">

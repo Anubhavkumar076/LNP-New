@@ -392,23 +392,38 @@ public class BBPSActivity extends AppCompatActivity {
                     queryToCreate.append("INSERT INTO lnp.bbps_info_details VALUES ("+null+", "+ bbpsInfoId +" , '"+ txnId
                             +"', '"+ operatorname +"', '"+ comm +"', '"+ tds +"', '"+ dateadded +"', '"+ refunded +"', '"
                             + refundtxnid +"')");
+
                     new Thread(() -> {
                         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
 
-                            String sql = "Select * from lnp.lnp_user where idlnp_user_id = '"+userIdInt;
+                            String sql = "Select * from lnp.lnp_user where idlnp_user_id = "+userIdInt;
                             Statement statement = connection.createStatement();
                             ResultSet rs = statement.executeQuery(sql);
                             Double bbpsCom = null;
+                            Double creditFund = null;
+                            Double debitFund = null;
                             while (rs.next()) {
                                 bbpsCom = rs.getDouble("lnp_user_bbps_comm");
-
+                                creditFund = rs.getDouble("lnp_user_credit_fund");
+                                debitFund = rs.getDouble("lnp_user_debit_fund");
                             }
                             statement = connection.createStatement();
                             statement.executeUpdate(queryToCreate.toString());
 
                             Double commission = (Double) (Double.parseDouble(comm)/100 * bbpsCom);
-                            Double finalAmount = Double.parseDouble(amount) - commission;
-                            sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund - "+ finalAmount +" where idlnp_user_id = "+ userIdInt;
+                            Double creditWallet = commission - Double.parseDouble(tds);
+                            creditFund +=  creditWallet;
+                            debitFund -= Double.parseDouble(amount);
+
+                            StringBuilder transactionQuery = new StringBuilder();
+                            transactionQuery.append("INSERT INTO lnp.all_transactions VALUES ("+null+", 'BBPS', '"+ amount
+                                    +"', '"+ creditWallet +"', '"+ creditFund +"', '"+ debitFund + "', "+ userIdInt +")");
+
+                            statement.executeUpdate(transactionQuery.toString());
+
+                            sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund - "+ Double.parseDouble(amount)
+                                    +", lnp_user_credit_fund = lnp_user_credit_fund + "+ creditWallet +"where idlnp_user_id = "+ userIdInt;
+
                             Statement amountUpdate = connection.createStatement();
                             amountUpdate.executeUpdate(sql);
 

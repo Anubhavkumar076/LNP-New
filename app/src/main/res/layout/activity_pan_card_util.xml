@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.PanCardUtilActivity"
-    android:background="@mipmap/background_trial">
+    android:background="@color/screen_background">
 
     <GridView
         android:id="@+id/pan_card_util"
@@ -19,7 +19,7 @@
         android:verticalSpacing="7dp"
         android:horizontalSpacing="7dp"
         android:numColumns="4"
-        android:background="@mipmap/background_trial"
+        android:background="@drawable/input"
         android:stretchMode="columnWidth"
         >
     </GridView>

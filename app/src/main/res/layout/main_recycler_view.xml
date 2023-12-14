@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,13 +26,14 @@
             android:id="@+id/gridView"
             android:layout_below="@id/assistance_query_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:columnWidth="50dp"
+            android:scrollbars="none"
             android:layout_marginTop="3dp"
             android:gravity="center_horizontal"
             android:verticalSpacing="10dp"
             android:horizontalSpacing="10dp"
-            android:numColumns="4"
+            android:numColumns="auto_fit"
             android:background="@drawable/input"
             android:stretchMode="columnWidth"
             >
@@ -56,22 +58,77 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         android:id="@+id/utility_grid_view_relative"
         android:layout_below="@id/main_retailer_text"
         android:background="@drawable/input"
         android:padding="10dp"
         android:layout_margin="5dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bills_utility_text"
+            android:text="Bills and Utility"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textColor="#3F51B3"
+            />
+
         <GridView
             android:id="@+id/utility_main_grid"
+            android:layout_below="@id/bills_utility_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnWidth="50dp"
+            android:layout_height="match_parent"
+            android:columnWidth="100dp"
             android:layout_marginTop="3dp"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:verticalSpacing="10dp"
             android:horizontalSpacing="10dp"
+            android:layout_margin="4dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:numColumns="4"
+            android:background="@drawable/input"
+            android:stretchMode="columnWidth"
+            >
+        </GridView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:id="@+id/admin_grid_view_relative"
+        android:layout_below="@id/utility_grid_view_relative"
+        android:background="@drawable/input"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/admin_utility_text"
+            android:text="Admin Config"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textColor="#3F51B3"
+            />
+
+        <GridView
+            android:id="@+id/admin_main_grid"
+            android:layout_below="@id/admin_utility_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnWidth="100dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:layout_margin="4dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:numColumns="4"
             android:background="@drawable/input"
             android:stretchMode="columnWidth"
@@ -81,21 +138,22 @@
     </RelativeLayout>
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="6"
         android:background="@drawable/input"
-        android:layout_below="@id/utility_grid_view_relative"
+        android:layout_below="@id/admin_grid_view_relative"
         android:id="@+id/main_support_linear"
-        android:padding="10dp"
+        android:padding="15dp"
         android:layout_margin="5dp">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:background="@color/black"
+            android:background="@mipmap/contact"
             android:padding="2dp"/>
 
         <TextView
@@ -113,21 +171,30 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:background="@drawable/baseline_local_phone_24"
+            android:padding="15dp"
+            android:layout_margin="2dp"
+            android:src="@mipmap/phone"
+            android:background="@color/white"
             android:id="@+id/main_phone"/>
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:background="@drawable/baseline_mail_outline_24"
+            android:padding="15dp"
+            android:background="@color/white"
+            android:layout_margin="2dp"
+            android:src="@mipmap/gmail"
             android:id="@+id/main_email"/>
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:background="@drawable/baseline_perm_phone_msg_24"
+            android:padding="15dp"
+            android:background="@color/white"
+            android:layout_margin="2dp"
+            android:src="@mipmap/whatsapp"
             android:id="@+id/main_whatsapp"/>
 
 
@@ -145,15 +212,29 @@
         android:padding="10dp"
         android:layout_margin="5dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/information_text"
+            android:text="Information Utility"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textColor="#3F51B3"
+            />
+
         <GridView
             android:id="@+id/utility_websites"
+            android:layout_below="@id/information_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnWidth="50dp"
+            android:layout_height="match_parent"
+            android:columnWidth="100dp"
             android:layout_marginTop="3dp"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:verticalSpacing="10dp"
             android:horizontalSpacing="10dp"
+            android:layout_margin="4dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:numColumns="4"
             android:background="@drawable/input"
             android:stretchMode="columnWidth"

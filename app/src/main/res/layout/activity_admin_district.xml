@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.AdminDistrictActivity"
-    android:background="@mipmap/background_trial">
+    android:background="@color/screen_background">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/input_dist"
+        android:background="#2D5FC5"
         android:layout_marginTop="20dp"
         android:id="@+id/admin_district_delete_relative"
         android:padding="10dp"
@@ -69,7 +69,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/input_dist"
+        android:background="#2D5FC5"
         android:layout_marginTop="20dp"
         android:id="@+id/admin_district_add_relative"
         android:layout_below="@id/admin_district_delete_relative"

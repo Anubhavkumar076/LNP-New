@@ -85,9 +85,9 @@ public class RetailerConfigActivity extends AppCompatActivity {
                 } else {
                     fullNameVar = null;
                     userIdVar = null;
-                    panCommVar = null;
-                    rechargeCommVar = null;
-                    bbpsComVar = null;
+                    panCommVar = 0D;
+                    rechargeCommVar = 0D;
+                    bbpsComVar = 0D;
                 }
 
                 runOnUiThread(() -> {
@@ -128,12 +128,31 @@ public class RetailerConfigActivity extends AppCompatActivity {
 
                                     new Thread(() -> {
                                         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+                                            String sql = "Select * from lnp.lnp_user where idlnp_user_id = "+userIdInt;
+                                            Statement statement = connection.createStatement();
+                                            ResultSet rs = statement.executeQuery(sql);
+                                            Double debitFund = null;
+                                            Double creditFund = null;
+                                            while (rs.next()) {
+                                                debitFund = rs.getDouble("lnp_user_debit_fund");
+                                                creditFund = rs.getDouble("lnp_user_credit_fund");
+                                            }
+                                            debitFund += Double.parseDouble(retailerConfigFund);
 
-                                            String sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund + "+ retailerConfigFund +" where idlnp_user_id = "+ userIdInt;
+                                            sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund + "+ retailerConfigFund +" where idlnp_user_id = "+ userIdInt;
                                             Statement amountUpdate = connection.createStatement();
                                             amountUpdate.executeUpdate(sql);
-                                            Toast.makeText(getApplicationContext(), "Fund Added for user LNP-ID-"+userIdInt, Toast.LENGTH_SHORT).show();
 
+                                            StringBuilder transactionQuery = new StringBuilder();
+                                            transactionQuery.append("INSERT INTO lnp.all_transactions VALUES ("+null+", 'Fund Request', '"+ Double.parseDouble(retailerConfigFund)
+                                                    +"', '0', '"+ creditFund +"', '"+ debitFund + "', "+ userIdInt +")");
+
+                                            statement.executeUpdate(transactionQuery.toString());
+
+                                            runOnUiThread(() -> {
+                                                Toast.makeText(getApplicationContext(), "Fund Added for user LNP-ID-"+userIdInt, Toast.LENGTH_SHORT).show();
+                                                progressBar.hide();
+                                            });
                                         } catch (Exception e) {
                                             Log.e("InfoAsyncTask", "Error reading school information", e);
                                         }
@@ -157,11 +176,10 @@ public class RetailerConfigActivity extends AppCompatActivity {
                 AlertDialog.Builder alertbox = new AlertDialog.Builder(view.getRootView().getContext());
                 StringBuilder sb = new StringBuilder();
                 sb.append("Recharge: "+ (!rechargeComm.isEmpty() ? rechargeComm : rechargeCommVar) +"%");
-                sb.append("\nPan: "+ (!panComm.isEmpty() ? panComm : panCommVar)+"%");
+                sb.append("\nPan: Rs. "+ (!panComm.isEmpty() ? panComm : panCommVar));
                 sb.append("\nBBPS: "+ (!bbpsComm.isEmpty() ? bbpsComm : bbpsComVar)+"%");
                 alertbox.setTitle("Commision Slab");
                 alertbox.setMessage(sb.toString());
-                alertbox.setCancelable(false);
 
                 alertbox.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {

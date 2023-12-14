@@ -327,23 +327,36 @@ public class BrowsePlanChildAdapter extends RecyclerView
                     new Thread(() -> {
                         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
 
-                            String sql = "Select * from lnp.lnp_user where idlnp_user_id = '"+userIdInt;
+                            String sql = "Select * from lnp.lnp_user where idlnp_user_id = "+userIdInt;
                             Statement statement = connection.createStatement();
                             ResultSet rs = statement.executeQuery(sql);
                             Double rechargeCom = null;
+                            Double creditFund = null;
+                            Double debitFund = null;
                             while (rs.next()) {
                                 rechargeCom = rs.getDouble("lnp_user_recharge_comm");
-
+                                creditFund = rs.getDouble("lnp_user_credit_fund");
+                                debitFund = rs.getDouble("lnp_user_debit_fund");
                             }
                             statement = connection.createStatement();
                             statement.executeUpdate(queryToCreate.toString());
 
                             Double commission = (Double) comm/100 * rechargeCom;
-                            Double finalAmount = amount[0] - commission;
+                            Double creditWallet = commission - Double.parseDouble(tds);
+                            creditFund +=  creditWallet;
+                            debitFund -=  amount[0];
+
+                            StringBuilder transactionQuery = new StringBuilder();
+                            transactionQuery.append("INSERT INTO lnp.all_transactions VALUES ("+null+", 'Recharge', '"+ amount
+                                    +"', '"+ creditWallet +"', '"+ creditFund +"', '"+ debitFund + "', "+ userIdInt +")");
+
+                            statement.executeUpdate(transactionQuery.toString());
+
+                            sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund - "+ amount[0]
+                                    +", lnp_user_credit_fund = lnp_user_credit_fund + "+ creditWallet +"where idlnp_user_id = "+ userIdInt;
 
                             statement = connection.createStatement();
                             statement.executeUpdate(queryToCreate.toString());
-                            sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund - "+ finalAmount +" where idlnp_user_id = "+ userIdInt;
                             Statement amountUpdate = connection.createStatement();
                             amountUpdate.executeUpdate(sql);
 

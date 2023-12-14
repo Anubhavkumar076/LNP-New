@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.AdminUserRetailerVerificationDetails"
-    android:background="@mipmap/background_trial">
+    android:background="@color/screen_background">
     
     <ImageView
         android:layout_width="match_parent"

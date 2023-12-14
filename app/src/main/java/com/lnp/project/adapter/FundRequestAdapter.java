@@ -1,5 +1,6 @@
 package com.lnp.project.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -54,7 +55,7 @@ public class FundRequestAdapter  extends RecyclerView.Adapter<FundRequestAdapter
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FundRequestAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FundRequestAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final FundRequestDto fundRequestDto = listdata.get(position);
         holder.fundRequestUserName.setText("Name: "+ fundRequestDto.getFundRequestUserName());
         holder.fundRequestRupees.setText("Amount(Rs): "+ fundRequestDto.getFundRequestRupees());
@@ -142,9 +143,26 @@ public class FundRequestAdapter  extends RecyclerView.Adapter<FundRequestAdapter
     public void approveFundRequest(String userId, String amount) {
         new Thread(() -> {
             try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                String sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund + "+ amount +" where idlnp_user_id = "+ userId;
+                String sql = "Select * from lnp.lnp_user where idlnp_user_id = "+userId;
                 Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(sql);
+                Double debitFund = null;
+                Double creditFund = null;
+                while (rs.next()) {
+                    debitFund = rs.getDouble("lnp_user_debit_fund");
+                    creditFund = rs.getDouble("lnp_user_credit_fund");
+                }
+                debitFund += Double.parseDouble(amount);
+
+                sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund + "+ amount +" where idlnp_user_id = "+ userId;
+                statement = connection.createStatement();
                 statement.executeUpdate(sql);
+
+                StringBuilder transactionQuery = new StringBuilder();
+                transactionQuery.append("INSERT INTO lnp.all_transactions VALUES ("+null+", 'Fund Request', '"+ amount
+                        +"', '0', '"+ creditFund +"', '"+ debitFund + "', "+ userId +")");
+
+                statement.executeUpdate(transactionQuery.toString());
 
                 String fundRequestStatusUpdate = "UPDATE lnp.fund_request SET fund_request_is_approved = 1 where fund_request_user_id = "+ userId;
                 statement.executeUpdate(fundRequestStatusUpdate);

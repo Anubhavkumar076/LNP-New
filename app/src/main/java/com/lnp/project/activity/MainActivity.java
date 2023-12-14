@@ -46,6 +46,7 @@ import com.lnp.project.LedgerFragment;
 import com.lnp.project.LoginActivity;
 import com.lnp.project.ProfileFragment;
 import com.lnp.project.R;
+import com.lnp.project.WalletFragment;
 import com.lnp.project.adapter.ImageAdapter;
 import com.lnp.project.adapter.MainAdapter;
 import com.lnp.project.adapter.ViewBBPSAdapter;
@@ -77,14 +78,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String USER = "admin";
     private static final String PASSWORD = "adminlnp";
 
-//    String creditWallet, debitWallet;
-//
-//    TextView creditWalletText, debitWalletText;
-////    retailerVerifyText;
-//
-//    CardView cardView;
-//
-//    RecyclerView mRecycler;
+    String creditWallet, debitWallet;
+    Integer userIdInt;
+    String retailerCreditWallet = null, retailerDebitWallet = null;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -229,36 +225,22 @@ public class MainActivity extends AppCompatActivity {
 
     Boolean isAdmin, isRetailer;
     BottomNavigationView bottomNavigationView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sp = getSharedPreferences("login",MODE_PRIVATE);
-//        creditWalletText = findViewById(R.id.credit_balance_text);
-//        debitWalletText = findViewById(R.id.debit_card_balance);
-//        cardView = findViewById(R.id.main_card_view);
-//        mRecycler = findViewById(R.id.main_recycler_list);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-//        getCreditBalance();
-//        getDebitBalance();
+        getCreditBalance();
+        getDebitBalance();
         setTitle("LNP Mini Bank");
-//        MainAdapterDto mainAdapterDto = new MainAdapterDto();
         isAdmin = sp.getBoolean("admin", false);
         isRetailer = sp.getBoolean("retailer", false);
-        Integer userIdInt = Integer.parseInt(sp.getString("userId", ""));
-//        List<MainAdapterDto> mainAdapterDtoList = new ArrayList<>();
-//        if (isAdmin)
-//            mainAdapterDto.setAdmin(true);
-//        else if (isRetailer) {
-//            mainAdapterDto.setRetailer(true);
-//        } else {
-//            mainAdapterDto.setUser(true);
-//        }
+        userIdInt = Integer.parseInt(sp.getString("userId", ""));
 
-//        if (!isRetailer && !isAdmin) {
-//            cardView.setVisibility(View.GONE);
-//        }
 
 
         new Thread(() -> {
@@ -282,62 +264,11 @@ public class MainActivity extends AppCompatActivity {
 
                     Picasso.get().load(uri.toString()).into(image);
 
-                     if(isRetailer) {
-                        new Thread(() -> {
-                            try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
-                                String retailerWallet = "SELECT * FROM lnp.lnp_user where idlnp_user_id = "+ userIdInt;
-
-                                Statement retailerStatement = conn.createStatement();
-                                ResultSet resultSet = retailerStatement.executeQuery(retailerWallet);
-                                String retailerCreditWallet = null, retailerDebitWallet = null;
-                                while (resultSet.next()) {
-                                    retailerCreditWallet = resultSet.getString("lnp_user_credit_fund");
-                                    retailerDebitWallet = resultSet.getString("lnp_user_debit_fund");
-                                }
-
-                                Bundle bundle = new Bundle();
-                                bundle.putString("retailerCreditWallet", retailerCreditWallet);
-                                bundle.putString("retailerDebitWallet", retailerDebitWallet);
-                                HomeFragment homeFragment = new HomeFragment();
-                                homeFragment.setArguments(bundle);
-//                                runOnUiThread(() -> {
-//                                    try {
-//                                            creditWalletText.setText("Credit Wallet: \n"+ finalRetailerCreditWallet);
-//                                            debitWalletText.setText("Debit Wallet: \n"+ finalRetailerDebitWallet);
-//
-//                                    } catch (Exception ex) {
-//                                        Log.e("InfoAsyncTask", "Error reading school information", ex);
-//                                    }
-//
-//                                });
-                            } catch (Exception e) {
-                                Log.e("InfoAsyncTask", "Error reading school information", e);
-                            }
-
-                        }).start();
-                    } else {
-//                        if(creditWallet != null && debitWallet != null) {
-//                            walletText = true;
-//                            creditWalletText.setText("Credit Wallet: \n"+creditWallet);
-//                            debitWalletText.setText("Debit Wallet: \n"+debitWallet);
-//                        }
-                    }
-
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-
-//                    while(walletText) {
-////                        creditWalletText.setText("Credit Wallet: \n"+creditWallet);
-////                        debitWalletText.setText("Debit Wallet: \n"+debitWallet);
-//                        if (!mainAdapterDtoList.isEmpty()
-//                                && mainAdapterDtoList.get(0).getDebitWallet() == null  && debitWallet != null) {
-//                            mainAdapterDtoList.get(0).setDebitWallet(debitWallet);
-//                        }
-//                        break;
-//                    }
 
                     builder.setView(imageLayoutView)
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -356,6 +287,21 @@ public class MainActivity extends AppCompatActivity {
 
         }).start();
 
+//        new Thread(() -> {
+//            try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
+//                String retailerWallet = "SELECT * FROM lnp.lnp_user where idlnp_user_id = "+ userIdInt;
+//
+//                Statement retailerStatement = conn.createStatement();
+//                ResultSet resultSet = retailerStatement.executeQuery(retailerWallet);
+//                while (resultSet.next()) {
+//                    retailerCreditWallet = resultSet.getString("lnp_user_credit_fund");
+//                    retailerDebitWallet = resultSet.getString("lnp_user_debit_fund");
+//                }
+//            } catch (Exception e) {
+//                Log.e("InfoAsyncTask", "Error reading school information", e);
+//            }
+//
+//        }).start();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
@@ -378,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
                     } else if (item.getTitle().equals("Ledger")) {
                         selectedFragment = new LedgerFragment();
                     } else if (item.getTitle().equals("Wallet")) {
-                        selectedFragment = new ContactUsFragment();
+                        selectedFragment = new WalletFragment();
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -430,6 +376,110 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void getDebitBalance() {
+        String url = "http://www.techfolkapi.in/Paysprint/BalanceCheck";
+        JSONObject params = new JSONObject();
+        // on below line we are passing our key
+        // and value pair to our parameters.
+        try {
+            params.put("userId", "TECHFOLK");
+            params.put("balanceType", "CASH");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        // creating a new variable for our request queue
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject jsonObject = response.getJSONObject("responseData");
+                    debitWallet = jsonObject.getString("cdwallet");
+                    if (isAdmin) {
+                        new Thread(() -> {
+                            try (Connection updateCon = DriverManager.getConnection(URL, USER, PASSWORD)) {
+                                String updatesql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = "+ debitWallet +" where idlnp_user_id = "+ userIdInt;
+                                Statement amountUpdate = updateCon.createStatement();
+                                amountUpdate.executeUpdate(updatesql);
+
+                            } catch (Exception e) {
+                                Log.e("InfoAsyncTask", "Error reading school information", e);
+                            }
+
+                        }).start();
+                    }
+                } catch (JSONException e) {
+                    debitWallet = "NA";
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("partnerKey", "TechFolk@2023@#8376852504");
+
+                return params;
+            }
+        };
+        // below line is to make
+        // a json object request.
+        queue.add(request);
+    }
+
+    public void getCreditBalance() {
+        String url = "http://www.techfolkapi.in/Paysprint/BalanceCheck";
+
+        JSONObject params = new JSONObject();
+        // on below line we are passing our key
+        // and value pair to our parameters.
+        try {
+            params.put("userId", "TECHFOLK");
+            params.put("balanceType", "MAIN");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        // creating a new variable for our request queue
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject jsonObject = response.getJSONObject("responseData");
+                    creditWallet = jsonObject.getString("wallet");
+                } catch (JSONException e) {
+                    creditWallet = "NA";
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("partnerKey", "TechFolk@2023@#8376852504");
+
+                return params;
+            }
+        };
+        // below line is to make
+        // a json object request.
+        queue.add(request);
     }
 
 }

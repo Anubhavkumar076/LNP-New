@@ -116,10 +116,30 @@ public class PanCardWebViewActivity extends AppCompatActivity {
 
         new Thread(() -> {
             try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+
+                String sql = "Select * from lnp.lnp_user where idlnp_user_id = "+userId;
                 Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(sql);
+                Double panCom = null;
+                Double creditFund = null;
+                Double debitFund = null;
+                while (rs.next()) {
+                    panCom = rs.getDouble("lnp_user_pan_comm");
+                    creditFund = rs.getDouble("lnp_user_credit_fund");
+                    debitFund = rs.getDouble("lnp_user_debit_fund");
+                }
+                statement = connection.createStatement();
                 statement.executeUpdate(queryToCreate.toString());
 
-                String sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund - "+ 107 +" where idlnp_user_id = "+ userId;
+                debitFund -= panCom;
+
+                StringBuilder transactionQuery = new StringBuilder();
+                transactionQuery.append("INSERT INTO lnp.all_transactions VALUES ("+null+", 'PAN', '"+ panCom
+                        +"', '0', '"+ creditFund +"', '"+ debitFund + "', "+ userId +")");
+
+                statement.executeUpdate(transactionQuery.toString());
+
+                sql = "UPDATE lnp.lnp_user SET lnp_user_debit_fund = lnp_user_debit_fund - "+ panCom +" where idlnp_user_id = "+ userId;
                 Statement amountUpdate = connection.createStatement();
                 amountUpdate.executeUpdate(sql);
 

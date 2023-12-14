@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@mipmap/background_trial">
+    android:background="@color/screen_background">
 
 <!--    <ScrollView-->
 <!--        android:layout_width="match_parent"-->
@@ -22,9 +22,12 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:id="@+id/bottom_navigation"
+        android:scrollbars="vertical"
+        android:nestedScrollingEnabled="true"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/background"
-        app:menu="@menu/menu_bottom_navigation"/>
+        android:background="@color/white"
+        app:menu="@menu/menu_bottom_navigation"
+        app:labelVisibilityMode="labeled"/>
 </RelativeLayout>
